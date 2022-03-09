@@ -7,9 +7,23 @@ export default function GlobeArea() {
   const WRAPPER = document.querySelector('#globe');
   const [width, setWidth] = useState(WRAPPER.clientWidth);
   const [height, setHeight] = useState(WRAPPER.clientHeight);
+  const colors = [
+    'white',
+    'silver',
+    'red',
+    'yellow',
+    'lime',
+    'green',
+    'aqua',
+    'teal',
+    'blue',
+    'fuchsia',
+    'purple'
+  ]
 
   // Calculate the arcs
   const arcsData = Array();
+  var originCount = 0;
   siteData.origins.forEach(origin => {
     siteData.caches.forEach(cache => {
       arcsData.push({
@@ -17,11 +31,12 @@ export default function GlobeArea() {
         startLng: origin.longitude,
         endLat: cache.latitude,
         endLng: cache.longitude,
-        color: [['red', 'white', 'blue', 'green'][Math.round(Math.random() * 3)], ['red', 'white', 'blue', 'green'][Math.round(Math.random() * 3)]],
+        color: colors[originCount % colors.length],
         name: origin.host + ' -> ' + cache.host
       });
 
     });
+    originCount += 1;
   });
 
   var labelsData = Array();
