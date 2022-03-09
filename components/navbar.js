@@ -1,33 +1,42 @@
 import Image from "next/image"
 
 export default function NavBar() {
+
+  function expandMobileMenu() {
+    document.getElementById("mobile-menu").classList.toggle("hidden");
+  }
+
   return (
-    <nav className="flex items-center justify-between flex-wrap bg-gray-900 p-6">
-      <div className="container mx-auto flex items-center flex-no-shrink text-white mr-6">
-        <div className="flex items-center flex-shrink-0 text-white mr-6">
-          <Image src={"/OSG-logo.svg"} alt="logo" width="60" height="30" />
-          <span className="font-semibold text-xl tracking-tight ml-2">OSDF</span>
-        </div>
-        <div className="block md:hidden">
-          <button data-collapse-toggle="mobile-menu" type="button" aria-controls="mobile-menu" aria-expanded="false" className="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
-            <svg className="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" /></svg>
+    <>
+      <nav className=" px-2 sm:px-4 py-5 bg-gray-900">
+        <div className="container flex flex-wrap justify-between items-center mx-auto">
+          <a href="#" className="flex items-center">
+            <Image src={"/OSG-logo.svg"} alt="logo" width="60" height="30" />
+            <span className="self-center text-xl font-semibold whitespace-nowrap text-white ml-2">OSDF</span>
+          </a>
+          <button onClick={expandMobileMenu} data-collapse-toggle="mobile-menu" type="button" className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden focus:outline-none" aria-controls="mobile-menu-2" aria-expanded="false">
+            <span className="sr-only">Open main menu</span>
+            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
           </button>
-        </div>
-        <div className="hidden w-full md:block md:w-auto" id="mobile-menu">
-          <div className="text-sm lg:flex-grow">
-            <a href="https://opensciencegrid.org/docs/data/stashcache/overview/" className="block mt-4 lg:inline-block lg:mt-0 hover:text-white mr-4">
-              Docs
-            </a>
-            <a href="https://support.opensciencegrid.org/support/solutions/articles/12000002775-transfer-large-input-and-output-files" className="block mt-4 lg:inline-block lg:mt-0 hover:text-white mr-4">
-              Examples
-            </a>
-            <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 hover:text-white">
-              Blog
-            </a>
+          <div className="hidden w-full md:block md:w-auto" id="mobile-menu">
+            <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
+              <li>
+                <a href="https://opensciencegrid.org/docs/data/stashcache/overview/" className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
+                  Docs
+                </a>
+              </li>
+              <li>
+                <a href="https://support.opensciencegrid.org/support/solutions/articles/12000002775-transfer-large-input-and-output-files" className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
+                  Examples
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+
+
+    </>
   )
 }
 

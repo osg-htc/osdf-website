@@ -6,7 +6,7 @@ export default function GlobeArea() {
   const globeRef = useRef();
   const WRAPPER = document.querySelector('#globe');
   const [width, setWidth] = useState(WRAPPER.clientWidth);
-  const [height, setHeight] = useState(WRAPPER.clientHeight);
+  const [height, setHeight] = useState(WRAPPER.clientHeight < 500 ? 500 : WRAPPER.clientHeight);
   const colors = [
     'white',
     'silver',
