@@ -1,10 +1,12 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Globe from 'react-globe.gl';
 import siteData from '../data/sites.json';
 
 export default function GlobeArea() {
   const globeRef = useRef();
   const WRAPPER = document.querySelector('#globe');
+  const [width, setWidth] = useState(WRAPPER.clientWidth);
+  const [height, setHeight] = useState(WRAPPER.clientHeight);
 
   // Calculate the arcs
   const arcsData = Array();
@@ -49,10 +51,15 @@ export default function GlobeArea() {
     globe.pointOfView({ lat: 40, lng: -50, altitude: 2.5 });
 
 
-    window.addEventListener('resize', function () {
-      globe.width(WRAPPER.clientWidth);
-      globe.height(WRAPPER.clientHeight);
-    });
+    function resizeEvent() {
+      setWidth(WRAPPER.clientWidth);
+      setHeight(WRAPPER.clientHeight);
+    }
+    window.addEventListener('resize', resizeEvent);
+
+    return () => {
+      window.removeEventListener('resize', resizeEvent);
+    }
   }, []);
 
   function arcHover(arc, prevArc) {
@@ -76,8 +83,8 @@ export default function GlobeArea() {
         arcDashGap={() => Math.random()}
         arcDashAnimateTime={() => Math.random() * 4000 + 500}
         onArcHover={arcHover}
-        width={WRAPPER.clientWidth}
-        height={WRAPPER.clientHeight}
+        width={width}
+        height={height}
         labelsData={labelsData}
         labelSize={1}
 

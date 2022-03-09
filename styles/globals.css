@@ -7,5 +7,12 @@
     display: flex;
     align-items: center;
     vertical-align: middle;
-    min-height: 80vh;
+
+}
+
+@media screen and (min-width: 768px) {
+    .hero-text {
+        min-height: 80vh;
+    }
+    
 }
