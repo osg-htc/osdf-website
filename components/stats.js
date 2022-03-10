@@ -31,8 +31,8 @@ function humanFileSize(bytes, si = true, dp = 1) {
   */
   // We only want up to GB's, to show growth!
   const units = si
-    ? ['kB', 'MB', 'GB']
-    : ['KiB', 'MiB', 'GiB'];
+    ? ['kB', 'MB', 'GB', 'TB']
+    : ['KiB', 'MiB', 'GiB', 'TiB'];
   let u = -1;
   const r = 10 ** dp;
 
@@ -70,8 +70,8 @@ export default function Stats() {
     <>
       <section className='bg-gray-900 md:pr-6 pt-6'>
         <div className='container grid md:grid-cols-2 gap-4'>
-          <StatCard title='Bytes Read' value={read} rate={bytesPerSecond} humanFunction={humanFileSize} subtext={"Last 30 days"} icon={<CloudDownloadIcon className='h-10 w10' />} />
-          <StatCard title='Files Read' value={filesRead} rate={filesPerSecond} humanFunction={numberWithCommas} subtext={"Last 30 days"} icon={<FolderDownloadIcon className="h-10 w-10" />} />
+          <StatCard title='Bytes Read' value={read} rate={bytesPerSecond} humanFunction={humanFileSize} subtext={"Last 6 Months"} icon={<CloudDownloadIcon className='h-10 w10' />} />
+          <StatCard title='Files Read' value={filesRead} rate={filesPerSecond} humanFunction={numberWithCommas} subtext={"Last 6 Months"} icon={<FolderDownloadIcon className="h-10 w-10" />} />
         </div>
       </section>
     </>
