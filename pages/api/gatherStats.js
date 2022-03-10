@@ -21,7 +21,7 @@ async function getDataRead(callback) {
             {
               "range": {
                 "@timestamp": {
-                  "gte": "now-6M",
+                  "gte": "now-1y",
                   "lt": "now"
                 }
               }
@@ -54,7 +54,7 @@ async function getFilesRead(callback) {
             {
               "range": {
                 "@timestamp": {
-                  "gte": "now-6M",
+                  "gte": "now-1y",
                   "lt": "now"
                 }
               }
@@ -86,8 +86,8 @@ export default async function handler(req, res) {
   }, function (err, results) {
     console.log(results);
     res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate');
-    const bytesPerSecond = results.totalRead / (30 * 24 * 60 * 60 * 6);
-    const filesPerSecond = results.totalFiles / (30 * 24 * 60 * 60 * 6);
+    const bytesPerSecond = results.totalRead / (24 * 60 * 60 * 365);
+    const filesPerSecond = results.totalFiles / (24 * 60 * 60 * 365);
     res.status(200).json({ read: results.totalRead, bytesPerSecond: bytesPerSecond, filesRead: results.totalFiles, filesPerSecond: filesPerSecond, updatetime: Date.now() });
   });
 

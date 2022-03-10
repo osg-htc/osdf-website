@@ -70,8 +70,8 @@ export default function Stats() {
     <>
       <section className='bg-gray-900 md:pr-6 pt-6'>
         <div className='container grid md:grid-cols-2 gap-4'>
-          <StatCard title='Bytes Read' value={read} rate={bytesPerSecond} humanFunction={humanFileSize} subtext={"Last 6 Months"} icon={<CloudDownloadIcon className='h-10 w10' />} />
-          <StatCard title='Files Read' value={filesRead} rate={filesPerSecond} humanFunction={numberWithCommas} subtext={"Last 6 Months"} icon={<FolderDownloadIcon className="h-10 w-10" />} />
+          <StatCard title='Bytes Read' value={read} rate={bytesPerSecond} humanFunction={humanFileSize} subtext={"Last 1 Year"} icon={<CloudDownloadIcon className='h-10 w10' />} />
+          <StatCard title='Files Read' value={filesRead} rate={filesPerSecond} humanFunction={numberWithCommas} subtext={"Last 1 Year"} icon={<FolderDownloadIcon className="h-10 w-10" />} />
         </div>
       </section>
     </>
