@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import NavBar from '../components/navbar'
 import Footer from '../components/footer'
+import { ServerIcon, CodeIcon, GlobeIcon, CogIcon } from '@heroicons/react/outline'
 
 import dynamic from 'next/dynamic'
 import Stats from '../components/stats'
@@ -34,9 +35,41 @@ export default function Home() {
         </div>
 
       </div>
-      
+
+      <div className='w-full bg-gray-900 p-8 text-white'>
+
+        <div className='container flex flex-row justify-center items-stretch mx-auto'>
+          <div className='rounded shadow-lg bg-gray-800 p-6 mx-6 flex-1'>
+            <div className='flex flex-row'>
+              <CodeIcon className='h-7 w-7 text-lime-400 mr-1 my-1' />
+              <h3 className='text-lg font-semibold my-1'>Built on Open Source</h3>
+            </div>
+            <p>Built projects such as <a href="https://xrootd.slac.stanford.edu/" className='text-blue-300'>XRootD</a>,
+              {' '}<a href="https://xrootd.slac.stanford.edu/" className='text-blue-300'>CVMFS</a>,
+              and <a href="https://xrootd.slac.stanford.edu/" className='text-blue-300'>Kubernetes</a></p>
+          </div>
+          <div className='rounded shadow-lg bg-gray-800 p-6 mx-6 flex-1'>
+          <div className='flex flex-row'>
+            <CogIcon className='h-7 w-7 text-lime-400 mr-1 my-1' />
+            <h3 className='text-lg font-semibold my-1'>Client Tools availble on the OSG</h3>
+            </div>
+            <p>Client tools such as StashCP and CVMFS available for every operating system.</p>
+          </div>
+          <div className='rounded shadow-lg bg-gray-800 p-6 mx-6 flex-1'>
+          <div className='flex flex-row'>
+            <GlobeIcon className='h-7 w-7 text-lime-400 mr-1 my-1' />
+            <h3 className='text-lg font-semibold my-1'>
+              Globally Distributed Caches</h3>
+              </div>
+              <p>Caches located throughout the globe at participating organizations and on the network backbone.</p>
+          </div>
+        </div>
+
+
+      </div>
+
       <Footer />
-      
+
     </>
   )
 }

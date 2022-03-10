@@ -1,9 +1,9 @@
 const { Client } = require('@elastic/elasticsearch')
 const client = new Client({ node: 'https://gracc.opensciencegrid.org' })
+const async = require('async');
 
 
-export default async function handler(req, res) {
-  console.log("Starting request to gracc.opensciencegrid.org");
+async function getDataRead(callback) {
   const result = await client.transport.request({
     method: 'POST',
     path: '/q/xrd-stash*/_search',
@@ -40,6 +40,10 @@ export default async function handler(req, res) {
   });
   console.log(result)
   const totalRead = result.aggregations.read.value;
+  callback(null, totalRead);
+}
+
+async function getFilesRead(callback) {
   const resultCount = await client.transport.request({
     method: 'POST',
     path: '/q/xrd-stash*/_count',
@@ -67,8 +71,26 @@ export default async function handler(req, res) {
       }
     }
   });
-  res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate');
-  const bytesPerSecond = totalRead / (30 * 24 * 60 * 60);
-  const filesPerSecond = resultCount.count / (30 * 24 * 60 * 60);
-  res.status(200).json({ read: totalRead, bytesPerSecond: bytesPerSecond, filesRead: resultCount.count, filesPerSecond: filesPerSecond, updatetime: Date.now() });
+  callback(null, resultCount.count);
+}
+
+export default async function handler(req, res) {
+  console.log("Starting request to gracc.opensciencegrid.org");
+  async.parallel({
+    totalRead: function (callback) {
+      getDataRead(callback);
+    },
+    totalFiles: function (callback) {
+      getFilesRead(callback);
+    }
+  }, function (err, results) {
+    console.log(results);
+    res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate');
+    const bytesPerSecond = results.totalRead / (30 * 24 * 60 * 60);
+    const filesPerSecond = results.totalFiles / (30 * 24 * 60 * 60);
+    res.status(200).json({ read: results.totalRead, bytesPerSecond: bytesPerSecond, filesRead: results.totalFiles, filesPerSecond: filesPerSecond, updatetime: Date.now() });
+  });
+
+
+
 }
