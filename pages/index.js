@@ -19,7 +19,7 @@ export default function Home() {
       </Head>
 
       <div className='w-full flex bg-gray-900 p-6'>
-        <div className='container mx-auto md:grid md:grid-cols-2 md:gap-4'>
+        <div className='container mx-auto lg:grid lg:grid-cols-2 lg:gap-4'>
           <div className='hero-text'>
             <div>
               <h1 className='md:text-6xl text-2xl font-extrabold mb-4 text-white'>Open Science Data Federation</h1>

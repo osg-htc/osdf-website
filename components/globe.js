@@ -62,7 +62,7 @@ export default function GlobeArea() {
     const globe = globeRef.current;
     globe.controls().autoRotate = true;
     globe.controls().autoRotateSpeed = 0.5;
-    globe.controls().object.zoom = 1.2;
+    globe.controls().object.zoom = 1.0;
     globe.pointOfView({ lat: 40, lng: -50, altitude: 2.5 });
 
     // Check for mobile device, and turn off the globe controls
