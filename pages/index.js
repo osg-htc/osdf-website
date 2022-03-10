@@ -38,8 +38,8 @@ export default function Home() {
 
       <div className='w-full bg-gray-900 p-8 text-white'>
 
-        <div className='container flex flex-row justify-center items-stretch mx-auto'>
-          <div className='rounded shadow-lg bg-gray-800 p-6 mx-6 flex-1'>
+        <div className='container flex-none md:flex md:flex-row justify-center items-stretch mx-auto'>
+          <div className='rounded shadow-lg bg-gray-800 p-6 mx-6 flex-1 my-6 md:my-0'>
             <div className='flex flex-row'>
               <CodeIcon className='h-7 w-7 text-lime-400 mr-1 my-1' />
               <h3 className='text-lg font-semibold my-1'>Built on Open Source</h3>
@@ -48,20 +48,20 @@ export default function Home() {
               {' '}<a href="https://xrootd.slac.stanford.edu/" className='text-blue-300'>CVMFS</a>,
               and <a href="https://xrootd.slac.stanford.edu/" className='text-blue-300'>Kubernetes</a></p>
           </div>
-          <div className='rounded shadow-lg bg-gray-800 p-6 mx-6 flex-1'>
-          <div className='flex flex-row'>
-            <CogIcon className='h-7 w-7 text-lime-400 mr-1 my-1' />
-            <h3 className='text-lg font-semibold my-1'>Client Tools availble on the OSG</h3>
+          <div className='rounded shadow-lg bg-gray-800 p-6 mx-6 flex-1 my-6 md:my-0'>
+            <div className='flex flex-row'>
+              <CogIcon className='h-7 w-7 text-lime-400 mr-1 my-1' />
+              <h3 className='text-lg font-semibold my-1'>Client Tools availble on the OSG</h3>
             </div>
             <p>Client tools such as StashCP and CVMFS available for every operating system.</p>
           </div>
-          <div className='rounded shadow-lg bg-gray-800 p-6 mx-6 flex-1'>
-          <div className='flex flex-row'>
-            <GlobeIcon className='h-7 w-7 text-lime-400 mr-1 my-1' />
-            <h3 className='text-lg font-semibold my-1'>
-              Globally Distributed Caches</h3>
-              </div>
-              <p>Caches located throughout the globe at participating organizations and on the network backbone.</p>
+          <div className='rounded shadow-lg bg-gray-800 p-6 mx-6 flex-1 my-6 md:my-0'>
+            <div className='flex flex-row'>
+              <GlobeIcon className='h-7 w-7 text-lime-400 mr-1 my-1' />
+              <h3 className='text-lg font-semibold my-1'>
+                Globally Distributed Caches</h3>
+            </div>
+            <p>Caches located throughout the globe at participating organizations and on the network backbone.</p>
           </div>
         </div>
 

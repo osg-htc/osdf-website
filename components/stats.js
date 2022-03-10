@@ -67,8 +67,8 @@ export default function Stats() {
 
   return (
     <>
-      <section className='bg-gray-900 pr-6 pt-6'>
-        <div className='container grid grid-cols-2 gap-4'>
+      <section className='bg-gray-900 md:pr-6 pt-6'>
+        <div className='container grid md:grid-cols-2 gap-4'>
           <StatCard title='Bytes Read' value={read} rate={bytesPerSecond} humanFunction={humanFileSize} subtext={"Last 30 days"} />
           <StatCard title='Files Read' value={filesRead} rate={filesPerSecond} humanFunction={numberWithCommas} subtext={"Last 30 days"} icon={<FolderDownloadIcon />} />
         </div>
