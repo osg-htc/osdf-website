@@ -63,9 +63,14 @@ export default function GlobeArea() {
     globe.controls().autoRotate = true;
     globe.controls().autoRotateSpeed = 0.5;
     globe.controls().object.zoom = 1.2;
-    //globe.controls().enabled = false;
     globe.pointOfView({ lat: 40, lng: -50, altitude: 2.5 });
 
+    // Check for mobile device, and turn off the globe controls
+    let isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
+    if (isMobile) {
+        //Conditional script here
+        globe.controls().enabled = false;
+    }
 
     function resizeEvent() {
       setWidth(WRAPPER.clientWidth);
