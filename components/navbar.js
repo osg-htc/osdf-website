@@ -1,4 +1,5 @@
 import Image from "next/image"
+import NavLink from "./navlink";
 
 export default function NavBar() {
 
@@ -10,7 +11,7 @@ export default function NavBar() {
     <>
       <nav className=" px-2 sm:px-4 py-5 bg-gray-900">
         <div className="container flex flex-wrap justify-between items-center mx-auto">
-          <a href="#" className="flex items-center">
+          <a href="/" className="flex items-center">
             <Image src={"/OSG-logo.svg"} alt="logo" width="60" height="30" />
             <span className="self-center text-xl font-semibold whitespace-nowrap text-white ml-2">OSDF</span>
           </a>
@@ -20,6 +21,11 @@ export default function NavBar() {
           </button>
           <div className="hidden w-full md:block md:w-auto" id="mobile-menu">
             <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
+              <li>
+                <NavLink href="/stashcp" exact={true} className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4 active:font-bold">
+                  StashCP
+                </NavLink>
+              </li>
               <li>
                 <a href="https://opensciencegrid.org/docs/data/stashcache/overview/" className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
                   Docs

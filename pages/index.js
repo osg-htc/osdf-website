@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import NavBar from '../components/navbar'
 import Footer from '../components/footer'
 import { ServerIcon, CodeIcon, GlobeIcon, CogIcon } from '@heroicons/react/outline'
@@ -44,16 +45,16 @@ export default function Home() {
               <CodeIcon className='h-7 w-7 text-lime-400 mr-1 my-1' />
               <h3 className='text-lg font-semibold my-1'>Built on Open Source</h3>
             </div>
-            <p>Built projects such as <a href="https://xrootd.slac.stanford.edu/" className='text-blue-300'>XRootD</a>,
-              {' '}<a href="https://xrootd.slac.stanford.edu/" className='text-blue-300'>CVMFS</a>,
-              and <a href="https://xrootd.slac.stanford.edu/" className='text-blue-300'>Kubernetes</a></p>
+            <p>Built projects such as <a href="https://xrootd.slac.stanford.edu/" className='text-blue-300 hover:text-blue-500'>XRootD</a>,
+              {' '}<a href="https://xrootd.slac.stanford.edu/" className='text-blue-300 hover:text-blue-500'>CVMFS</a>,
+              and <a href="https://xrootd.slac.stanford.edu/" className='text-blue-300 hover:text-blue-500'>Kubernetes</a></p>
           </div>
           <div className='rounded shadow-lg bg-gray-800 p-6 mx-6 flex-1 my-6 md:my-0'>
             <div className='flex flex-row'>
               <CogIcon className='h-7 w-7 text-lime-400 mr-1 my-1' />
               <h3 className='text-lg font-semibold my-1'>Client Tools availble on the OSG</h3>
             </div>
-            <p>Client tools such as StashCP and CVMFS available for every operating system.</p>
+            <p>Client tools such as <Link href="/stashcp"><a className='text-blue-300 hover:text-blue-500'>StashCP</a></Link> and CVMFS available for every operating system.</p>
           </div>
           <div className='rounded shadow-lg bg-gray-800 p-6 mx-6 flex-1 my-6 md:my-0'>
             <div className='flex flex-row'>
