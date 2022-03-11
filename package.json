@@ -3,12 +3,14 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "export": "next export"
   },
   "dependencies": {
     "@elastic/elasticsearch": "^8.1.0",
     "@heroicons/react": "^1.0.6",
     "async": "^3.2.3",
+    "aws-sdk": "^2.1091.0",
     "next": "latest",
     "react": "17.0.2",
     "react-dom": "17.0.2",
