@@ -22,17 +22,17 @@ export default function NavBar() {
           <div className="hidden w-full md:block md:w-auto" id="mobile-menu">
             <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
               <li>
-                <NavLink href="/stashcp" exact={true} className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4 active:font-bold">
+                <NavLink href="/stashcp" exact={true} className="block mt-4 lg:inline-block lg:mt-0 text-white link-underline mr-4 active:font-bold">
                   StashCP
                 </NavLink>
               </li>
               <li>
-                <a href="https://opensciencegrid.org/docs/data/stashcache/overview/" className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
+                <a href="https://opensciencegrid.org/docs/data/stashcache/overview/" className="block mt-4 lg:inline-block lg:mt-0 text-white link-underline mr-4">
                   Docs
                 </a>
               </li>
               <li>
-                <a href="https://support.opensciencegrid.org/support/solutions/articles/12000002775-transfer-large-input-and-output-files" className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4">
+                <a href="https://support.opensciencegrid.org/support/solutions/articles/12000002775-transfer-large-input-and-output-files" className="block mt-4 lg:inline-block lg:mt-0 text-white link-underline mr-4">
                   Examples
                 </a>
               </li>
@@ -40,7 +40,25 @@ export default function NavBar() {
           </div>
         </div>
       </nav>
-
+      <style jsx>{`
+      .link-underline {
+        border-bottom-width: 0;
+        background-image: linear-gradient(transparent, transparent), linear-gradient(#fff, #fff);
+        background-size: 0 3px;
+        background-position: 0 100%;
+        background-repeat: no-repeat;
+        transition: background-size .5s ease-in-out;
+      }
+    
+      .link-underline-black {
+        background-image: linear-gradient(transparent, transparent), linear-gradient(#F2C, #F2C)
+      }
+    
+      .link-underline:hover {
+        background-size: 100% 3px;
+        background-position: 0 100%
+      }
+      `}</style>
 
     </>
   )
