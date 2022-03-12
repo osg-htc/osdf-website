@@ -4,9 +4,8 @@ import siteData from '../data/sites.json';
 
 export default function GlobeArea() {
   const globeRef = useRef();
-  const WRAPPER = document.querySelector('#globe');
-  const [width, setWidth] = useState(WRAPPER.clientWidth);
-  const [height, setHeight] = useState(WRAPPER.clientHeight < 500 ? 500 : WRAPPER.clientHeight);
+  const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
   const colors = [
     'white',
     'silver',
@@ -20,6 +19,18 @@ export default function GlobeArea() {
     'fuchsia',
     'purple'
   ]
+
+  useEffect(() => {
+    window.addEventListener('resize', () => {
+      const WRAPPER = document.querySelector('#globe');
+      setWidth(WRAPPER.clientWidth);
+      setHeight(WRAPPER.clientHeight < 500 ? 500 : WRAPPER.clientHeight);
+    });
+    const WRAPPER = document.querySelector('#globe');
+    setWidth(WRAPPER.clientWidth);
+    setHeight(WRAPPER.clientHeight < 500 ? 500 : WRAPPER.clientHeight);
+
+  }, [])
 
   // Calculate the arcs
   const arcsData = Array();
@@ -68,8 +79,8 @@ export default function GlobeArea() {
     // Check for mobile device, and turn off the globe controls
     let isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
     if (isMobile) {
-        //Conditional script here
-        globe.controls().enabled = false;
+      //Conditional script here
+      globe.controls().enabled = false;
     }
 
     function resizeEvent() {
