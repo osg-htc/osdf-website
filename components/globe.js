@@ -21,15 +21,16 @@ export default function GlobeArea() {
   ]
 
   useEffect(() => {
-    window.addEventListener('resize', () => {
+    function resize() {
       const WRAPPER = document.querySelector('#globe');
       setWidth(WRAPPER.clientWidth);
       setHeight(WRAPPER.clientHeight < 500 ? 500 : WRAPPER.clientHeight);
-    });
-    const WRAPPER = document.querySelector('#globe');
-    setWidth(WRAPPER.clientWidth);
-    setHeight(WRAPPER.clientHeight < 500 ? 500 : WRAPPER.clientHeight);
-
+    }
+    window.addEventListener('resize', resize);
+    resize();
+    return () => {
+      window.removeEventListener('resize', resize);
+    }
   }, [])
 
   // Calculate the arcs

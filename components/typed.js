@@ -31,11 +31,11 @@ export default function TypedArea() {
 
   return (
     <>
-      <div className="typed-container w-full">
+      <div className="typed-container w-full text-sm lg:text-inherit">
         <div className="bg-gray-300 py-1 rounded-t-md text-center text-black shadow font-bold border-b border-gray-400">
           Terminal
           </div>
-        <div className="bg-white p-3 rounded-b-md h-20">
+        <div className="bg-white p-3 rounded-b-md h-40">
           <span className="typed-text text-black font-mono" ref={el} />
         </div>
       </div>
