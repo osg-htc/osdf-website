@@ -7,10 +7,24 @@ import { ServerIcon, CodeIcon, GlobeIcon, CogIcon } from '@heroicons/react/outli
 import dynamic from 'next/dynamic'
 import Stats from '../components/stats'
 import FeatureIcon from '../components/featureIcon'
+import { getData } from './api/gatherStats'
 
 const GlobeArea = dynamic(() => import('../components/globe.js'), { ssr: false })
 
-export default function Home() {
+
+export async function getStaticProps() {
+  const data = await getData()
+  console.log("In static props:" + data);
+  return {
+    props: {
+      usageData:data
+    }
+  }
+}
+
+export default function Home({usageData}) {
+  console.log("In home:");
+  console.log(usageData);
   return (
     <>
       <NavBar />
@@ -28,7 +42,7 @@ export default function Home() {
               <p className='mt-5 sm:mt-10 lg:w-10/12 text-gray-400 font-normal text-lg sm:text-lg">'>
                 Providing data access and transfer services for Open Science
               </p>
-              <Stats />
+              <Stats inputData = {usageData} />
             </div>
           </div>
           <div id="globe">

@@ -124,38 +124,28 @@ function getSavedState() {
         reject(err);
       } else {
         console.log(data);           // successful response
-        resolve(data);
+        resolve(data.Body);
       }
     });
   });
   return returnedPromise;
 }
 
-export default async function handler(req, res) {
-  console.log("Starting request to gracc.opensciencegrid.org");
-  res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate');
-
-  // Run the gracc queries in parallel
-  async.parallel({
-    totalRead: function (callback) {
-      getDataRead(callback);
-    },
-    totalFiles: function (callback) {
-      getFilesRead(callback);
-    }
-  }, function (err, results) {
-    if (err) {
-      console.log(err);
-      // Try to get the saved state
-      getSavedState().then(function (data) {
-        console.log("Successfully retrieved saved state");
-        console.log(data.Body.toString());
-        res.status(200).send(data.Body.toString());
-      });
-    } else {
-      console.log("Successfully retrieved data from gracc.opensciencegrid.org");
-      console.log(results);
-
+export async function getData() {
+  var toReturn = new Promise((resolve, reject) => {
+    // Run the gracc queries in parallel
+    async.parallel({
+      totalRead: function (callback) {
+        getDataRead(callback);
+      },
+      totalFiles: function (callback) {
+        getFilesRead(callback);
+      }
+    }, function (err, results) {
+      if (err) {
+        console.log(err);
+        reject(err);
+      }
       const bytesPerSecond = results.totalRead / (24 * 60 * 60 * 365);
       const filesPerSecond = results.totalFiles / (24 * 60 * 60 * 365);
       const result = {
@@ -165,12 +155,28 @@ export default async function handler(req, res) {
         filesPerSecond: filesPerSecond,
         updatetime: Date.now()
       }
-      saveResult(result);
-
-      res.status(200).json(result);
-    }
+      resolve(result);
+    });
   });
+  return toReturn;
+}
 
-
+export default async function handler(req, res) {
+  console.log("Starting request to gracc.opensciencegrid.org");
+  res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate');
+  var data;
+  try {
+    data = await getData();
+    saveResult(data);
+  } catch (err) {
+    console.log(err);
+    try {
+      data = await getSavedState();
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({err: err});
+    }
+  }
+  res.status(200).json(data);
 
 }

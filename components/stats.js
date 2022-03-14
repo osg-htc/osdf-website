@@ -51,7 +51,9 @@ function numberWithCommas(x) {
   }
 }
 
-export default function Stats() {
+
+
+export default function Stats({inputData}) {
 
   const { data, error } = useSWR('/api/gatherStats', fetcher)
   var read = 0;
@@ -64,6 +66,11 @@ export default function Stats() {
     filesRead = data.filesRead;
     bytesPerSecond = data.bytesPerSecond;
     filesPerSecond = data.filesPerSecond;
+  } else {
+    read = inputData.read;
+    filesRead = inputData.filesRead;
+    bytesPerSecond = inputData.bytesPerSecond;
+    filesPerSecond = inputData.filesPerSecond;
   }
 
   return (
@@ -78,7 +85,7 @@ export default function Stats() {
   )
 }
 
-function StatCard({ title, value, unit, rate, humanFunction, subtext, icon }) {
+function StatCard({ title, value, unit, rate, humanFunction, subtext, icon, loading, lastUpdate }) {
 
   const [showRate, setShowRate] = useState(0);
   const [timer, setTimer] = useState(0);
