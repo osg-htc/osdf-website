@@ -29,7 +29,14 @@
       "city": "Newport News",
       "latitude": 37.094401,
       "longitude": -76.48161
+    },
+    {
+      "host": "prp01.ifa.hawaii.edu",
+      "city": "Honolulu",
+      "latitude": 21.299,
+      "longitude": -157.816
     }
+
   ],
   "caches": [
     {
