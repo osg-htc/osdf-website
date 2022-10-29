@@ -153,7 +153,7 @@ export async function getData() {
         filesRead: results.totalFiles,
         bytesPerSecond: bytesPerSecond,
         filesPerSecond: filesPerSecond,
-        updatetime: Date.now()
+        updateTime: Date.now()
       }
       resolve(result);
     });

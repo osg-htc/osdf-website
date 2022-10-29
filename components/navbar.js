@@ -27,6 +27,11 @@ export default function NavBar() {
                 </NavLink>
               </li>
               <li>
+                <NavLink href="/reports" exact={true} className="block mt-4 lg:inline-block lg:mt-0 text-white link-underline mr-4 active:font-bold">
+                  Reports
+                </NavLink>
+              </li>
+              <li>
                 <a href="https://opensciencegrid.org/docs/data/stashcache/overview/" className="block mt-4 lg:inline-block lg:mt-0 text-white link-underline mr-4">
                   Docs
                 </a>

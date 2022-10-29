@@ -17,12 +17,12 @@ export async function getStaticProps() {
   console.log("In static props:" + data);
   return {
     props: {
-      usageData:data
+      usageData: data
     }
   }
 }
 
-export default function Home({usageData}) {
+export default function Home({ usageData }) {
   console.log("In home:");
   console.log(usageData);
   return (
@@ -42,7 +42,7 @@ export default function Home({usageData}) {
               <p className='mt-5 sm:mt-10 lg:w-10/12 text-gray-400 font-normal text-lg sm:text-lg">'>
                 Providing data access and transfer services for Open Science
               </p>
-              <Stats inputData = {usageData} />
+              <Stats inputData={usageData} />
             </div>
           </div>
           <div id="globe">
@@ -77,6 +77,12 @@ export default function Home({usageData}) {
 
 
       </div>
+      <section className='bg-gray-900 p-8 text-white'>
+        <div className='container mx-auto'>
+          <h2 className='text-3xl font-extrabold mb-4 text-white'>Features</h2>
+          
+        </div>
+      </section>
 
       <Footer />
 
