@@ -22,8 +22,8 @@ export default function NavBar() {
           <div className="hidden w-full md:block md:w-auto" id="mobile-menu">
             <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
               <li>
-                <NavLink href="/stashcp" exact={true} className="block mt-4 lg:inline-block lg:mt-0 text-white link-underline mr-4 active:font-bold">
-                  StashCP
+                <NavLink href="/client" exact={true} className="block mt-4 lg:inline-block lg:mt-0 text-white link-underline mr-4 active:font-bold">
+                  Client
                 </NavLink>
               </li>
               <li>
