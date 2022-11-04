@@ -14,12 +14,12 @@ export default async function handler(req, res) {
         })
         response.on('end', () => {
             namespaces = JSON.parse(data);
-            console.log(namespaces);
-            res.status(200).json({'numCaches': namespaces.caches.length});
+            //console.log(namespaces);
+            res.status(200).json({'caches': namespaces.caches});
         });
     })
     request.on('error', (error) => {
-        console.error(error)
+        //console.error(error)
         res.status(500).json({'error': error});
     })
     request.end()

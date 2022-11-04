@@ -4,7 +4,8 @@ import StatsCard from '../components/statsCard'
 import BriefcaseIcon from '@heroicons/react/outline/BriefcaseIcon'
 import useSWR from 'swr'
 import CacheUsageGraph from '../components/cacheUsageGraph'
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect, useRef } from 'react'
+import { useQueryState } from '../components/useQueryState';
 
 
 function fetcher(url) {
@@ -92,21 +93,22 @@ function createPeriods() {
 
 export default function Reports() {
   const periods = useMemo(() => createPeriods(), []);
-  const [period, setPeriod] = useState(periods[0].value.toString());
+  //const [period, setPeriod] = useState(periods[0].value.toString());
+  const [periodState, setPeriod] = useQueryState("period", periods[0].value.toString());
 
-  
+  // Calculate the number of caches:
   const numCachesData = useSWR('/api/getNumCaches', fetcher)
-      // Calculate the number of caches:
   let numCaches = 0;
   if (numCachesData.data) {
-    numCaches = numCachesData.data.numCaches;
+    numCaches = numCachesData.data.caches.length;
   } if (!numCachesData.data && !numCachesData.error) {
     numCaches = "Loading...";
   } else if (numCachesData.error) {
     numCaches = "Error";
   }
 
-  const [start, end] = period.split(",").map(x => parseInt(x));
+  //console.log(periodState);
+  const [start, end] = periodState.split(",").map(x => parseInt(x));
   const cacheUsage = useSWR('/api/cacheUsage?start=' + start + '&end=' + end, fetcher);
   
   // Add up all the days
@@ -134,7 +136,7 @@ export default function Reports() {
 
 
   function changePeriod(event) {
-    var period = event.target.value;
+    let period = event.target.value;
     console.log(period);
     setPeriod(period);
   }
@@ -189,9 +191,10 @@ export default function Reports() {
         </div>
         <div className='grid mt-4 justify-center gap-4'>
           <select className='border border-gray-300 rounded-md shadow-sm py-2 px-3 text-sm font-medium text-gray-900 bg-white hover:bg-gray-50 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500'
-            onChange={changePeriod} defaultValue={periods[0].value}
+            onChange={changePeriod}
+            value={periodState}
             data-html2canvas-ignore="true">
-            {createPeriods().map((period) => (
+            {periods.map((period) => (
               <option key={period.label} value={period.value}>{period.label}</option>
             ))}
           </select>
@@ -202,11 +205,19 @@ export default function Reports() {
         </div>
         <div className='grid grid-cols-3 mt-8 justify-center divide-x-2 lg:max-w-5xl mx-auto'>
           <StatsCard icon={<BriefcaseIcon className='h-7 w-7 text-lime-400 mr-1 my-1' />} title='Projects' value={totalProjects} />
-          <StatsCard icon={<BriefcaseIcon className='h-7 w-7 text-lime-400 mr-1 my-1' />} title='Caches' value={numCaches} />
+          <StatsCard icon={<BriefcaseIcon className='h-7 w-7 text-lime-400 mr-1 my-1' />} title='Caches' value={numCaches}>
+            <div className='flex flex-col'>
+              {numCachesData.data && numCachesData.data.caches.map((cache) => (
+                <div key={cache['resource']} className='flex flex-row text-xs text-gray-600'>
+                  {cache['resource']}
+                </div>
+                ))}
+            </div>
+          </StatsCard>
           <StatsCard icon={<BriefcaseIcon className='h-7 w-7 text-lime-400 mr-1 my-1' />} title='Transferred' value={totalUsage} />
         </div>
         <div className='flex justify-items-center place-content-center mt-8'>
-          <CacheUsageGraph timeperiod={period} />
+          <CacheUsageGraph timeperiod={periodState} />
         </div>
       </div>
     </>
