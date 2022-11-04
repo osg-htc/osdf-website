@@ -206,13 +206,6 @@ export default function Reports() {
         <div className='grid grid-cols-3 mt-8 justify-center divide-x-2 lg:max-w-5xl mx-auto'>
           <StatsCard icon={<BriefcaseIcon className='h-7 w-7 text-lime-400 mr-1 my-1' />} title='Projects' value={totalProjects} />
           <StatsCard icon={<BriefcaseIcon className='h-7 w-7 text-lime-400 mr-1 my-1' />} title='Caches' value={numCaches}>
-            <div className='flex flex-col'>
-              {numCachesData.data && numCachesData.data.caches.map((cache) => (
-                <div key={cache['resource']} className='flex flex-row text-xs text-gray-600'>
-                  {cache['resource']}
-                </div>
-                ))}
-            </div>
           </StatsCard>
           <StatsCard icon={<BriefcaseIcon className='h-7 w-7 text-lime-400 mr-1 my-1' />} title='Transferred' value={totalUsage} />
         </div>
