@@ -72,17 +72,18 @@ function createPeriods() {
     }
     // Convert month and year to unix epoch
     var date = new Date(Date.UTC(year, month, 1));
-    console.log("Start date:" + date);
+    console.log("Start date:" + date.toLocaleString('default', { timeZone: 'UTC' }));
     // convert date to unix epoch
     var startMonth = date.getUTCMonth();
     var englishMonth = date.toLocaleString('default', { month: 'short', timeZone: 'UTC' });
     var startEpoch = date.getTime() / 1000;
     // Add 1 month
-    date.setMonth(date.getUTCMonth() % 12);
+    date.setUTCMonth((date.getUTCMonth() + 1) % 12, 0)
+    date.setUTCHours(23, 59, 59);
 
     // convert date to unix epoch
     var endEpoch = date.getTime() / 1000;
-    console.log("End date:" + date);
+    console.log("End date:" +  date.toLocaleString('default', { timeZone: 'UTC' }));
 
     var period = { month: month, year: year, label: englishMonth + " " + year, value: [startEpoch, endEpoch] };
     periods.push(period);
