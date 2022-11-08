@@ -144,6 +144,18 @@ function setupGraph(series, dom_id, title, background, showgraph = true, element
     .style("text-anchor", "end")
     .text("Bytes");
 
+  const tooltip = d3.select("body")
+    .append("div")
+    .attr("class", "d3-tooltip")
+    .style("position", "absolute")
+    .style("z-index", "10")
+    .style("visibility", "hidden")
+    .style("padding", "15px")
+    .style("background", "rgba(0,0,0,0.6)")
+    .style("border-radius", "5px")
+    .style("color", "#fff")
+    .text("a simple tooltip");
+
   svg.selectAll("bar")
     .data(series)
     .enter().append("rect")
@@ -151,7 +163,22 @@ function setupGraph(series, dom_id, title, background, showgraph = true, element
     .attr("x", function (d) { return x(d.date); })
     .attr("width", x.bandwidth())
     .attr("y", function (d) { return y(d.value); })
-    .attr("height", function (d) { return height - y(d.value); });
+    .attr("height", function (d) { return height - y(d.value); })
+    .on("mouseover", function (d, i) {
+      let date = d3.utcFormat("%b %d")(parseTime(i.date));
+      let value = humanFileSize(i.value);
+      tooltip.html(`${date}: ${value}`).style("visibility", "visible");
+      
+    })
+    .on("mousemove", function (event) {
+      tooltip
+        .style("top", (event.pageY - 10) + "px")
+        .style("left", (event.pageX + 10) + "px");
+    })
+    .on("mouseout", function () {
+      tooltip.html(``).style("visibility", "hidden");
+      //d3.select(this).attr("fill", bar_color);
+    });
 
   console.log(series);
 

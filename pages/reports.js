@@ -127,7 +127,7 @@ export default function Reports() {
   const perProjectUsage = useSWR('/api/perProjectUsage?start=' + start + '&end=' + end, fetcher);
   let totalProjects = 0;
   if (perProjectUsage.data) {
-    totalProjects = Object.keys(perProjectUsage.data).length;
+    totalProjects = Object.keys(perProjectUsage.data.directories).length;
   } else if (!perProjectUsage.data && !perProjectUsage.error) {
     totalProjects = "Loading...";
   } else if (perProjectUsage.error) {

@@ -46,6 +46,19 @@ export default async function handler(req, res) {
                 }
               }
             }
+          },
+          "bycache": {
+            "terms": {
+              "field": "server_hostname.keyword",
+              "size": 10000
+            },
+            "aggs": {
+              "read": {
+                "sum": {
+                  "field": "read"
+                }
+              }
+            }
           }
         }
       }
@@ -72,7 +85,18 @@ export default async function handler(req, res) {
     data[project] += bucket.read.value;
   });
 
-  //console.log(data);
+  let caches = {};
+  result.aggregations.bycache.buckets.forEach(function (bucket) {
+    // Caches are the keys
+    let cache = bucket.key;
+    if (caches[cache] == undefined) {
+      caches[cache] = 0;
+    }
+    caches[cache] += bucket.read.value;
+  });
 
-  res.status(200).json(data);
+  console.log(caches);
+  res.status(200).json({ 'directories': data, 'caches': caches });
+
+  //console.log(data);
 }
