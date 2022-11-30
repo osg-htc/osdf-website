@@ -8,7 +8,7 @@ import { useState, useMemo, useEffect, useRef } from 'react'
 import { useQueryState } from '../components/useQueryState';
 import Map, { Marker, Layer, NavigationControl, Source } from 'react-map-gl';
 import siteData from '../data/sites.json';
-import { humanFileSize } from '../util/util';
+import { humanFileSize } from '../util/util.js';
 
 function fetcher(url) {
   return fetch(url).then(r => r.json())
