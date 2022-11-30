@@ -60,6 +60,22 @@ export default function OSDFMap() {
     //console.log(combined);
   }
 
+  // Sort the caches by region
+  const cachesByRegion = useMemo(() => {
+    const cachesByRegion = {};
+    for (let i = 0; i < siteData.caches.length; i++) {
+      let cache = siteData.caches[i];
+      cache["index"] = i;
+      const region = cache.region;
+      if (region in cachesByRegion) {
+        cachesByRegion[region].push(cache);
+      } else {
+        cachesByRegion[region] = [cache];
+      }
+    }
+    return cachesByRegion;
+  }, [siteData.caches]);
+
   return (
     <>
       <Head>
@@ -116,9 +132,14 @@ export default function OSDFMap() {
               id="cache"
               className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
               onChange={(e) => setCache(siteData.caches[e.target.value])}>
-              {siteData.caches.map((cache, i) => {
+              {Object.keys(cachesByRegion).map((region, i) => {
                 return (
-                  <option value={i}>{cache.city}</option>
+                  <optgroup label={region} key={i}>
+                  {cachesByRegion[region].map((cache, j) => {
+                    return (
+                      <option value={cache.index} key={cache.index}>{cache.city}</option>
+                    )})}
+                  </optgroup>
                 );
               })}
             </select>

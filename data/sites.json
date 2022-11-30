@@ -42,102 +42,119 @@
     {
       "host": "osg.chic.nrp.internet2.edu",
       "city": "Chicago",
+      "region": "North America",
       "latitude": 41.8882,
       "longitude": -87.6164
     },
     {
       "host": "osg.kans.nrp.internet2.edu",
       "city": "Kansas City",
+      "region": "North America",
       "latitude": 39.1024,
       "longitude": -94.5986
     },
     {
       "host": "osg-houston-stashcache.nrp.internet2.edu",
       "city": "Houston",
+      "region": "North America",
       "latitude": 29.8131,
       "longitude": -95.3098
     },
     {
       "host": "osg.newy32aoa.nrp.internet2.edu",
       "city": "New York",
+      "region": "North America",
       "latitude": 40.7145,
       "longitude": -74.0029
     },
     {
       "host": "osg-sunnyvale-stashcache.nrp.internet2.edu",
       "city": "Sunnyvale",
+      "region": "North America",
       "latitude": 37.373779,
       "longitude": -121.987513
     },
     {
       "host": "osg-gftp2.pace.gatech.edu",
       "city": "Atlanta",
+      "region": "North America",
       "latitude": 33.7758,
       "longitude": -84.3947
     },
     {
       "host": "its-condor-xrootd1.syr.edu",
       "city": "Syracuse",
+      "region": "North America",
       "latitude": 43.0385961,
       "longitude": -76.13268340000002
     },
     {
       "host": "sc-cache.chtc.wisc.edu",
       "city": "Madison",
+      "region": "North America",
       "latitude": 43.071568,
       "longitude": -89.406931
     },
     {
       "host": "xcachevirgo.pic.es",
       "city": "Bellaterra",
+      "region": "Europe",
       "latitude": 41.50,
       "longitude": 2.11
     },
     {
       "host": "xcache.cr.cnaf.infn.it",
       "city": "Bologna",
+      "region": "Europe",
       "latitude": 44.50,
       "longitude": 11.34
     },
     {
       "host": "ingrid-se09.cism.ucl.ac.be",
       "city": "Ottignies-Louvain-la-Neuve",
+      "region": "Europe",
       "latitude": 50.666707,
       "longitude": 4.623733
     },
     {
       "host": "fiona-r-uva.vlan7.uvalight.net",
       "city": "Amsterdam",
+      "region": "Europe",
       "latitude": 52.3824,
       "longitude": 4.8995
     },
     {
       "host": "stashcache.gravity.cf.ac.uk",
       "city": "Cardiff",
+      "region": "Europe",
       "latitude": 51.4879593,
       "longitude": -3.186923
     },
     {
       "host": "stash.farm.particle.cz",
       "city": "Prague",
+      "region": "Europe",
       "latitude": 50.123424,
       "longitude": 14.468787
     },
     {
       "host": "dtn2-daejeon.kreonet.net",
       "city": "Daejeon",
+      "region": "Asia",
       "latitude": 36.366,
       "longitude": 127.366
     },
     {
       "host": "stashcache.t2.ucsd.edu",
       "city": "La Jolla",
+      "region": "North America",
       "latitude": 32.868053,
       "longitude": -117.246094
     },
     {
       "host": "ligo.hpc.swin.edu.au",
       "city": "Hawthorn",
+      "region": "Oceana",
       "latitude": -37.822741,
       "longitude": 145.038203
     }
