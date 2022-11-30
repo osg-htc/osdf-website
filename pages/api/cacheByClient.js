@@ -2,15 +2,16 @@ const { Client } = require('@elastic/elasticsearch')
 const client = new Client({ node: 'https://gracc.opensciencegrid.org' })
 var geoip = require('geoip-lite');
 const dns = require('dns');
+const net = require('net');
 
 
 async function lookupPromise(host) {
   return new Promise((resolve, reject) => {
-      dns.lookup(host, (err, address, family) => {
-          if(err) reject(err);
-          resolve(address);
-      });
- });
+    dns.lookup(host, (err, address, family) => {
+      if (err) reject(err);
+      resolve(address);
+    });
+  });
 };
 
 export default async function handler(req, res) {
@@ -53,7 +54,8 @@ export default async function handler(req, res) {
         "aggs": {
           "by_client": {
             "terms": {
-              "field": "host.keyword"
+              "field": "host.keyword",
+              "size": 100000
             },
             "aggs": {
               "sum_read": {
@@ -72,20 +74,38 @@ export default async function handler(req, res) {
   }
 
   console.log(result);
-  let data = new Array();
+  let alreadLookedUp = {};
   for (let i = 0; i < result.aggregations.by_client.buckets.length; i++) {
     let bucket = result.aggregations.by_client.buckets[i];
     let client = bucket.key;
     // Remove [ and ] from ipv6 addresses
     client = client.replace("[", "");
     client = client.replace("]", "");
-    
+
     // If the geiop lookup fails, remove a subdomain and try again
-    try {
-      var address = await lookupPromise(client)
-    } catch (err) {
-      console.log(err);
-      //continue;
+
+    // Check if we've already looked up this domain
+
+    // Get everything after the first dot
+    // Check if the client starts with ffff:
+    var domain = ""
+    if (net.isIP(client)) {
+      domain = client;
+    } else {
+      domain = client.split(".").slice(1).join(".");
+    }
+    if (alreadLookedUp[domain]) {
+      console.log("Already looked up " + domain);
+      alreadLookedUp[domain]["value"] += bucket.sum_read.value;
+      continue;
+    }
+    if (!net.isIP(client)) {
+      try {
+        var address = await lookupPromise(client)
+      } catch (err) {
+        console.log(err);
+        //continue;
+      }
     }
     let geo = geoip.lookup(address);
     console.log(geo);
@@ -106,8 +126,20 @@ export default async function handler(req, res) {
       geo = geoip.lookup(address);
       console.log(geo);
     }
-
-    data.push({name: bucket.key, value: bucket.sum_read.value, geo: geo});
+    // Add to the already looked up list
+    if (net.isIP(client)) {
+      alreadLookedUp[client] = { "value": bucket.sum_read.value, "geo": geo };
+    } else {
+      alreadLookedUp[domain] = {
+        "value": bucket.sum_read.value,
+        "geo": geo
+      };
+    }
+    //data.push({ name: bucket.key, value: bucket.sum_read.value, geo: geo });
+  }
+  let data = [];
+  for (const [key, value] of Object.entries(alreadLookedUp)) {
+    data.push({ name: key, value: value["value"], geo: value["geo"] });
   }
   res.status(200).json(data);
 

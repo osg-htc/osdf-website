@@ -9,6 +9,7 @@ import { useQueryState } from '../components/useQueryState';
 import Map, { Marker, Layer, NavigationControl, Source } from 'react-map-gl';
 import siteData from '../data/sites.json';
 import { humanFileSize } from '../util/util.js';
+import DataTable from 'react-data-table-component';
 
 function fetcher(url) {
   return fetch(url).then(r => r.json())
@@ -37,6 +38,26 @@ const initialViewState = {
   bearing: 0,
   //projection: 'globe'
 };
+
+function ExpandedRow({ data }) {
+  return (
+    <div className='p-2 flex flex-col text-xs'>
+      <div>
+        <span className='font-bold'>Host:</span> {data.name}
+      </div>
+      <div>
+        <span className='font-bold'>City:</span> {data.geo.city}
+      </div>
+      <div>
+        <span className='font-bold'>Region:</span> {data.geo.region}
+      </div>
+      <div>
+        <span className='font-bold'>Country:</span> {data.geo.country}
+      </div>
+    </div>
+  );
+}
+
 
 export default function OSDFMap() {
   const mapRef = useRef();
@@ -77,6 +98,20 @@ export default function OSDFMap() {
     return cachesByRegion;
   }, [siteData.caches]);
 
+  const columns = [
+    {
+      name: 'Location',
+      selector: row => row.geo.city ? row.geo.city + ", " + row.geo.region : "Unknown",
+      sortable: true,
+    },
+    {
+      name: 'Transferred',
+      selector: row => row.value,
+      format: row => humanFileSize(row.value),
+      sortable: true,
+    },
+  ];
+
   return (
     <>
       <Head>
@@ -84,8 +119,8 @@ export default function OSDFMap() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <NavBar />
-      <div className="grid grid-cols-4">
-        <div className='col-span-3'>
+      <div className="grid grid-cols-3">
+        <div className='col-span-2'>
           <div className='flex flex-col h-screen'>
             <div className='flex-grow'>
               <Map
@@ -145,6 +180,7 @@ export default function OSDFMap() {
                 );
               })}
             </select>
+            { /* }
             {!cachesByClient && (
               <div role="status" className='mt-3'>
                 <p className='text-sm font-medium text-gray-900 dark:text-white'>Loading clients...</p>
@@ -155,29 +191,20 @@ export default function OSDFMap() {
                 <span className="sr-only">Loading...</span>
               </div>
             )}
-            {cachesByClient && (
-              <div className='mt-3'>
-                <p className='text-sm font-medium text-gray-900 dark:text-white'>Clients in last 30 days</p>
-                <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400 mt-2'>
-                  <thead className='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
-                    <tr>
-                      <th scope='col' className='py-3 px-6'>City</th>
-                      <th scope='col' className='py-3 px-6'>Transferred</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {clients.map((client, i) => {
-                      return (
-                        <tr key={i} className='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>
-                          <th scope='row' className='py-2 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white'>{client.geo.city ? client.geo.city + ", " + client.geo.region : "Unknown"}</th>
-                          <td className='py-2 px-6'>{humanFileSize(client.value)}</td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </div>
-            )}
+            */ }
+            <div className='mt-3'>
+              <DataTable
+                title="Clients in the last 30 days"
+                columns={columns}
+                data={clients}
+                expandableRows
+                expandableRowsComponent={ExpandedRow}
+                dense
+                progressPending={cachesByClient == undefined} 
+                pagination
+                defaultSortAsc={false}
+                defaultSortFieldId={2}/>
+            </div>
           </div>
         </div>
       </div>
