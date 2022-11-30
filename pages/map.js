@@ -8,6 +8,7 @@ import { useState, useMemo, useEffect, useRef } from 'react'
 import { useQueryState } from '../components/useQueryState';
 import Map, { Marker, Layer, NavigationControl, Source } from 'react-map-gl';
 import siteData from '../data/sites.json';
+import { humanFileSize } from '../util/util';
 
 function fetcher(url) {
   return fetch(url).then(r => r.json())
@@ -134,11 +135,12 @@ export default function OSDFMap() {
               onChange={(e) => setCache(siteData.caches[e.target.value])}>
               {Object.keys(cachesByRegion).map((region, i) => {
                 return (
-                  <optgroup label={region} key={i}>
-                  {cachesByRegion[region].map((cache, j) => {
-                    return (
-                      <option value={cache.index} key={cache.index}>{cache.city}</option>
-                    )})}
+                  <optgroup label={region} key={region}>
+                    {cachesByRegion[region].map((cache, j) => {
+                      return (
+                        <option value={cache.index} key={cache.index}>{cache.city}</option>
+                      )
+                    })}
                   </optgroup>
                 );
               })}
@@ -155,14 +157,25 @@ export default function OSDFMap() {
             )}
             {cachesByClient && (
               <div className='mt-3'>
-                <p className='text-sm font-medium text-gray-900 dark:text-white'>Clients</p>
-                <ul className='mt-2 list-disc list-inside'>
-                  {clients.map((client, i) => {
-                    return (
-                      <li className='text-sm text-gray-900 dark:text-white'>{client.geo.city ? client.geo.city + ", " + client.geo.region : "Unknown"}</li>
-                    );
-                  })}
-                </ul>
+                <p className='text-sm font-medium text-gray-900 dark:text-white'>Clients in last 30 days</p>
+                <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400 mt-2'>
+                  <thead className='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
+                    <tr>
+                      <th scope='col' className='py-3 px-6'>City</th>
+                      <th scope='col' className='py-3 px-6'>Transferred</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {clients.map((client, i) => {
+                      return (
+                        <tr key={i} className='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>
+                          <th scope='row' className='py-2 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white'>{client.geo.city ? client.geo.city + ", " + client.geo.region : "Unknown"}</th>
+                          <td className='py-2 px-6'>{humanFileSize(client.value)}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
               </div>
             )}
           </div>
