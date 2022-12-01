@@ -97,6 +97,7 @@ export default async function handler(req, res) {
     if (alreadLookedUp[domain]) {
       console.log("Already looked up " + domain);
       alreadLookedUp[domain]["value"] += bucket.sum_read.value;
+      alreadLookedUp[domain]["clients"] += 1;
       continue;
     }
     if (!net.isIP(client)) {
@@ -132,14 +133,20 @@ export default async function handler(req, res) {
     } else {
       alreadLookedUp[domain] = {
         "value": bucket.sum_read.value,
-        "geo": geo
+        "geo": geo,
+        "clients": 1
       };
     }
     //data.push({ name: bucket.key, value: bucket.sum_read.value, geo: geo });
   }
   let data = [];
   for (const [key, value] of Object.entries(alreadLookedUp)) {
-    data.push({ name: key, value: value["value"], geo: value["geo"] });
+    data.push({
+      name: key,
+      value: value["value"],
+      geo: value["geo"],
+      clients: value["clients"]
+    });
   }
   res.status(200).json(data);
 
