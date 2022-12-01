@@ -239,31 +239,9 @@ export default function OSDFMap() {
                     console.log(tmpSelectedClient);
                     setSelectedClient(tmpSelectedClient);
                   }
-                  /*
-                  if (features.length > 0) {
-                    const feature = features[0];
-                    const cache = siteData.caches[feature.properties.index];
-                    setCache(cache);
-                  }
-                  */
                 }}
               >
-                {/* 
-                {cachesByClient && clients.map((client, i) => {
-                  return (
-                    <Marker
-                      key={i}
-                      longitude={client.geo.ll[1]}
-                      latitude={client.geo.ll[0]}
-                      anchor="center"
-                    >
-                      <div className="bg-blue-500 rounded-full p-1 h-4 w-4">
-                        {/* client.geo.city }
-                      </div>
-                    </Marker>
-                  );
-                })}
-              */}
+
                 {cachesByClient && (
                   <Source id="client-circles" type="geojson" data={collection}>
                     <Layer {...circleLayerStyle} />
@@ -297,23 +275,25 @@ export default function OSDFMap() {
         </div>
         <div className='col-span-1 sidebar-shadow'>
           <div className='flex flex-col h-screen p-2'>
-            <label for="cache" className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>Choose a <span className='text-red-500'>Cache</span></label>
-            <select name="cache"
-              id="cache"
-              className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
-              onChange={(e) => setCache(siteData.caches[e.target.value])}>
-              {Object.keys(cachesByRegion).map((region, i) => {
-                return (
-                  <optgroup label={region} key={region}>
-                    {cachesByRegion[region].map((cache, j) => {
-                      return (
-                        <option value={cache.index} key={cache.index}>{cache.city}</option>
-                      )
-                    })}
-                  </optgroup>
-                );
-              })}
-            </select>
+            <div className='flex flex-row items-center justify-center'>
+              <label for="cache" className='basis-1/3 block text-sm font-medium text-gray-900 dark:text-white'>Choose a <span className='text-red-500'>Cache</span></label>
+              <select name="cache"
+                id="cache"
+                className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                onChange={(e) => setCache(siteData.caches[e.target.value])}>
+                {Object.keys(cachesByRegion).map((region, i) => {
+                  return (
+                    <optgroup label={region} key={region}>
+                      {cachesByRegion[region].map((cache, j) => {
+                        return (
+                          <option value={cache.index} key={cache.index}>{cache.city}</option>
+                        )
+                      })}
+                    </optgroup>
+                  );
+                })}
+              </select>
+            </div>
             { /* }
             {!cachesByClient && (
               <div role="status" className='mt-3'>
