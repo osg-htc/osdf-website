@@ -78,14 +78,15 @@ function createPeriods() {
     var englishMonth = date.toLocaleString('default', { month: 'short', timeZone: 'UTC' });
     var startEpoch = date.getTime() / 1000;
     // Add 1 month
-    date.setUTCMonth((date.getUTCMonth() + 1) % 12, 0)
+    date.setUTCMonth((date.getUTCMonth() + 1), 0)
     date.setUTCHours(23, 59, 59);
+    //date.setUTCFullYear(currentYear);
 
     // convert date to unix epoch
     var endEpoch = date.getTime() / 1000;
     console.log("End date:" +  date.toLocaleString('default', { timeZone: 'UTC' }));
 
-    var period = { month: month, year: year, label: englishMonth + " " + year, value: [startEpoch, endEpoch] };
+    var period = { month: month, year: date.getUTCFullYear(), label: englishMonth + " " + date.getUTCFullYear(), value: [startEpoch, endEpoch] };
     periods.push(period);
   }
   return periods;
