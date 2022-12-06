@@ -17,6 +17,11 @@ function fetcher(url) {
 function combineClients(clients) {
   const combined = {};
   for (const client of clients) {
+    if (client.geo === null) {
+      console.log('Client has no geo data: ' + client.name);
+      console.log(client);
+      continue;
+    }
     const key = `${client.geo.city},${client.geo.region},${client.geo.country}`;
     if (key in combined) {
       combined[key].value += client.value;
