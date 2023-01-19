@@ -27,3 +27,9 @@
     stroke-width: 0;
   }
 
+
+.sidebar-shadow
+{
+  box-shadow: -3px 0 3px 0px #888;
+  z-index: 1;
+}
