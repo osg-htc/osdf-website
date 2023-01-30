@@ -77,15 +77,20 @@ export default function Home({ usageData }) {
 
 
       </div>
-      <section className='bg-gray-900 p-8 text-white'>
-        <div className='container mx-auto'>
-          <h2 className='text-3xl font-extrabold mb-4 text-white'>Features</h2>
-          
-        </div>
-      </section>
+
 
       <Footer />
 
     </>
   )
 }
+
+/*
+
+      <section className='bg-gray-900 p-8 text-white'>
+        <div className='container mx-auto'>
+          <h2 className='text-3xl font-extrabold mb-4 text-white'>Features</h2>
+          
+        </div>
+      </section>
+      */
