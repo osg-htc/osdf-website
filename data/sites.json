@@ -209,6 +209,13 @@
       "region": "North America",
       "latitude": 39.102682,
       "longitude": -84.50302
+    },
+    {
+      "host": "osg-stash-sfu-computecanada-ca.nationalresearchplatform.org",
+      "city": "Storrs",
+      "region": "North America",
+      "latitude": 41.8084,
+      "longitude": -72.2495
     }
   ]
 }
