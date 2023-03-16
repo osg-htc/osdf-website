@@ -71,7 +71,7 @@
       "longitude": -94.5986
     },
     {
-      "host": "osg-houston-stashcache.nrp.internet2.edu",
+      "host": "osg.hous.nrp.internet2.edu",
       "city": "Houston",
       "region": "North America",
       "latitude": 29.8131,
@@ -85,7 +85,7 @@
       "longitude": -74.0029
     },
     {
-      "host": "osg-sunnyvale-stashcache.nrp.internet2.edu",
+      "host": "osg.sunn.nrp.internet2.edu",
       "city": "Sunnyvale",
       "region": "North America",
       "latitude": 37.373779,
@@ -155,7 +155,7 @@
       "longitude": 14.468787
     },
     {
-      "host": "dtn2-daejeon.kreonet.net",
+      "host": "134.75.115.132",
       "city": "Daejeon",
       "region": "Asia",
       "latitude": 36.366,
@@ -176,21 +176,21 @@
       "longitude": 145.038203
     },
     {
-      "host": "sdsc-cache.nationalresearchplatform.org",
+      "host": "132.249.252.215",
       "city": "San Diego",
       "region": "North America",
       "latitude": 32.884,
       "longitude": -117.241
     },
     {
-      "host": "mghpcc-cache.nationalresearchplatform.org",
+      "host": "dtn-01.nrp.mghpcc.org",
       "city": "Holyoke",
       "region": "North America",
       "latitude": 42.2026,
       "longitude": -72.6073
     },
     {
-      "host": "unl-cache.nationalresearchplatform.org",
+      "host": "hcc-nrp-shor-c5832.unl.edu",
       "city": "Lincoln",
       "region": "North America",
       "latitude": 40.819818,
