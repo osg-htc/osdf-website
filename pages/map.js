@@ -60,6 +60,16 @@ function ExpandedRow({ data }) {
       <div>
         <span className='font-bold'>Country:</span> {data.geo.country}
       </div>
+      <div>
+        <div className='font-bold'>Clients:</div>
+        <div className='flex flex-wrap text-xs'>
+          {data.ips.map((ip, i) => (
+            <div key={i} className='border rounded p-1 m-0.5'>
+              {ip}
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

@@ -88,6 +88,7 @@ export default async function handler(req, res) {
 
     // Get everything after the first dot
     // Check if the client starts with ffff:
+    var rawClient = client;
     var domain = ""
     if (net.isIP(client)) {
       domain = client;
@@ -98,6 +99,7 @@ export default async function handler(req, res) {
       console.log("Already looked up " + domain);
       alreadLookedUp[domain]["value"] += bucket.sum_read.value;
       alreadLookedUp[domain]["clients"] += 1;
+      alreadLookedUp[domain]["ips"].push(rawClient);
       continue;
     }
     if (!net.isIP(client)) {
@@ -129,12 +131,13 @@ export default async function handler(req, res) {
     }
     // Add to the already looked up list
     if (net.isIP(client)) {
-      alreadLookedUp[client] = { "value": bucket.sum_read.value, "geo": geo };
+      alreadLookedUp[client] = { "value": bucket.sum_read.value, "geo": geo, "clients": 1, "ips": [rawClient] };
     } else {
       alreadLookedUp[domain] = {
         "value": bucket.sum_read.value,
         "geo": geo,
-        "clients": 1
+        "clients": 1,
+        "ips": [rawClient]
       };
     }
     //data.push({ name: bucket.key, value: bucket.sum_read.value, geo: geo });
@@ -145,7 +148,8 @@ export default async function handler(req, res) {
       name: key,
       value: value["value"],
       geo: value["geo"],
-      clients: value["clients"]
+      clients: value["clients"],
+      ips: value["ips"]
     });
   }
   res.status(200).json(data);
