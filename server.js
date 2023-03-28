@@ -25,7 +25,7 @@ const server = https.createServer(options, async (req, res) => {
     res.end('internal server error')
   }
 })
-const currentPort = parseInt(process.env.PORT, 10) || 3000
+const currentPort = parseInt(process.env.PORT, 10) || 8443
 
 server.listen(currentPort, (err) => {
   if (err) {
