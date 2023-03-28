@@ -12,11 +12,12 @@ process.on('SIGINT', () => process.exit(0))
 
 let handler
 
-const options = {
+const create_options = {
   key: fs.readFileSync('/certs/tls.key'),
   cert: fs.readFileSync('/certs/tls.crt'),
+  servername: ""
 };
-const server = https.createServer(options, async (req, res) => {
+const server = https.createServer(create_options, async (req, res) => {
   try {
     await handler(req, res)
   } catch (err) {
@@ -27,7 +28,11 @@ const server = https.createServer(options, async (req, res) => {
 })
 const currentPort = parseInt(process.env.PORT, 10) || 8443
 
-server.listen(currentPort, (err) => {
+let listen_options = {
+  port: currentPort,
+  hostname: '0.0.0.0'
+}
+server.listen(listen_options, (err) => {
   if (err) {
     console.error("Failed to start server", err)
     process.exit(1)
