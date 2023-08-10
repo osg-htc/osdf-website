@@ -57,6 +57,13 @@
   ],
   "caches": [
     {
+      "host": "osdf-cache.sprace.org.br",
+      "city": "São Paulo",
+      "region": "South America",
+      "latitude": -23.52433,
+      "longitude": -46.665469
+    },
+    {
       "host": "osg.chic.nrp.internet2.edu",
       "city": "Chicago",
       "region": "North America",
