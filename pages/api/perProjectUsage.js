@@ -78,6 +78,9 @@ export default async function handler(req, res) {
       project = "/gwdata";
     } else if (project.startsWith("/hcc")) {
       project = "/hcc";
+    } else if (project.startsWith("/ospool/monitoring/PROTECTED")) {
+      // Remove instances where /ospool/monitoring/PROTECTED is the directory
+      return;
     }
     if (data[project] == undefined) {
       data[project] = 0;
