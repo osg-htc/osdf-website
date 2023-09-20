@@ -64,6 +64,13 @@
       "longitude": -46.665469
     },
     {
+      "host": "singapore.nationalresearchplatform.org",
+      "city": "Singapore",
+      "region": "Oceana",
+      "latitude": 1.2961438422403178,
+      "longitude": 103.79088279998233
+    },
+    {
       "host": "osg.chic.nrp.internet2.edu",
       "city": "Chicago",
       "region": "North America",
