@@ -176,6 +176,13 @@
       "longitude": 145.038203
     },
     {
+      "host": "singapore.nationalresearchplatform.org",
+      "city": "Singapore",
+      "region": "Oceana",
+      "latitude": 1.2961438422403178,
+      "longitude": 103.79088279998233
+    },
+    {
       "host": "132.249.252.215",
       "city": "San Diego",
       "region": "North America",
