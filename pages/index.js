@@ -59,7 +59,7 @@ export default function Home({ usageData }) {
             title='Built on Open Source'
           >
             <p>Built on projects such as <a href="https://pelicanplatform.org/" className='text-blue-300 hover:text-blue-500'>Pelican</a>,
-              <a href="https://xrootd.slac.stanford.edu/" className='text-blue-300 hover:text-blue-500'>XRootD</a>,
+              {' '}<a href="https://xrootd.slac.stanford.edu/" className='text-blue-300 hover:text-blue-500'>XRootD</a>,
               {' '}<a href="https://cernvm.cern.ch/fs/" className='text-blue-300 hover:text-blue-500'>CVMFS</a>,
               and <a href="https://kubernetes.io/" className='text-blue-300 hover:text-blue-500'>Kubernetes</a></p>
 
