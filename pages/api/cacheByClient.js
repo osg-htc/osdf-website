@@ -1,4 +1,5 @@
-const { Client } = require('@elastic/elasticsearch')
+//const { Client } = require('@elastic/elasticsearch')
+const { Client } = require("@opensearch-project/opensearch");
 const client = new Client({ node: 'https://gracc.opensciencegrid.org' })
 var geoip = require('geoip-lite');
 const dns = require('dns');
@@ -75,8 +76,8 @@ export default async function handler(req, res) {
 
   console.log(result);
   let alreadLookedUp = {};
-  for (let i = 0; i < result.aggregations.by_client.buckets.length; i++) {
-    let bucket = result.aggregations.by_client.buckets[i];
+  for (let i = 0; i < result.body.aggregations.by_client.buckets.length; i++) {
+    let bucket = result.body.aggregations.by_client.buckets[i];
     let client = bucket.key;
     // Remove [ and ] from ipv6 addresses
     client = client.replace("[", "");

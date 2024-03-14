@@ -1,4 +1,5 @@
-const { Client } = require('@elastic/elasticsearch')
+//const { Client } = require('@elastic/elasticsearch')
+const { Client } = require("@opensearch-project/opensearch");
 const client = new Client({ node: 'https://gracc.opensciencegrid.org' })
 const async = require('async');
 const AWS = require('aws-sdk');
@@ -46,8 +47,9 @@ async function getDataRead(callback) {
     callback(err);
     return
   }
-  console.log(result)
-  const totalRead = result.aggregations.read.value;
+  console.log(result);
+  const totalRead = result.body.aggregations.read.value;
+  console.log(result.body.aggregations.read);
   callback(null, totalRead);
 }
 
@@ -86,7 +88,8 @@ async function getFilesRead(callback) {
     callback(err);
     return
   }
-  callback(null, resultCount.count);
+  console.log(resultCount.body);
+  callback(null, resultCount.body.count);
 }
 
 function getS3Config() {
@@ -177,6 +180,7 @@ export default async function handler(req, res) {
       res.status(500).json({err: err});
     }
   }
+  console.log(data);
   res.status(200).json(data);
 
 }

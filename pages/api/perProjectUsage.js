@@ -1,4 +1,5 @@
-const { Client } = require('@elastic/elasticsearch')
+//const { Client } = require('@elastic/elasticsearch')
+const { Client } = require("@opensearch-project/opensearch");
 const client = new Client({ node: 'https://gracc.opensciencegrid.org' })
 
 export default async function handler(req, res) {
@@ -71,7 +72,7 @@ export default async function handler(req, res) {
   //console.log(result.aggregations.bydirectory.buckets);
   let data = {};
 
-  result.aggregations.bydirectory.buckets.forEach(function (bucket) {
+  result.body.aggregations.bydirectory.buckets.forEach(function (bucket) {
     // Hueristics to add similar projects together
     let project = bucket.key;
     if (project.startsWith("/gwdata")) {
@@ -89,7 +90,7 @@ export default async function handler(req, res) {
   });
 
   let caches = {};
-  result.aggregations.bycache.buckets.forEach(function (bucket) {
+  result.body.aggregations.bycache.buckets.forEach(function (bucket) {
     // Caches are the keys
     let cache = bucket.key;
     if (caches[cache] == undefined) {

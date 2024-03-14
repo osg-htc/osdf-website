@@ -9,6 +9,7 @@
   "dependencies": {
     "@elastic/elasticsearch": "^8.1.0",
     "@heroicons/react": "^1.0.6",
+    "@opensearch-project/opensearch": "^2.6.0",
     "@turf/circle": "^6.5.0",
     "async": "^3.2.3",
     "aws-sdk": "^2.1091.0",
