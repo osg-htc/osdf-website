@@ -8,6 +8,21 @@ export default async function handler(req, res) {
   console.log(req.query.start);
   console.log(req.query.end);
   var result = null;
+  /* Aggregation query for by cache directory
+  "bycache": {
+            "terms": {
+              "field": "server_hostname.keyword",
+              "size": 10000
+            },
+            "aggs": {
+              "read": {
+                "sum": {
+                  "field": "read"
+                }
+              }
+            }
+          }
+  */
   try {
     result = await client.transport.request({
       method: 'POST',
@@ -47,19 +62,6 @@ export default async function handler(req, res) {
                 }
               }
             }
-          },
-          "bycache": {
-            "terms": {
-              "field": "server_hostname.keyword",
-              "size": 10000
-            },
-            "aggs": {
-              "read": {
-                "sum": {
-                  "field": "read"
-                }
-              }
-            }
           }
         }
       }
@@ -68,7 +70,7 @@ export default async function handler(req, res) {
     console.log(err);
     return
   }
-  //console.log(result)
+  console.log(result)
   //console.log(result.aggregations.bydirectory.buckets);
   let data = {};
 
@@ -89,6 +91,7 @@ export default async function handler(req, res) {
     data[project] += bucket.read.value;
   });
 
+  /*
   let caches = {};
   result.body.aggregations.bycache.buckets.forEach(function (bucket) {
     // Caches are the keys
@@ -98,9 +101,11 @@ export default async function handler(req, res) {
     }
     caches[cache] += bucket.read.value;
   });
+  */
 
-  console.log(caches);
-  res.status(200).json({ 'directories': data, 'caches': caches });
+  //console.log(caches);
+  //res.status(200).json({ 'directories': data, 'caches': caches });
+  res.status(200).json({ 'directories': data });
 
   //console.log(data);
 }
