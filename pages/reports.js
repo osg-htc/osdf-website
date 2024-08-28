@@ -184,9 +184,7 @@ export default function Reports() {
     <>
       <Head>
         <title>OSDF Reports</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
-      <NavBar />
       <div className='container mx-auto' id="report-frame">
         <div className='grid mt-4 justify-center'>
           <h1 className='text-4xl font-bold'>OSDF Reports: {month} {year}</h1>

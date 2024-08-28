@@ -85,7 +85,7 @@ export default function Stats({inputData}) {
   )
 }
 
-function StatCard({ title, value, unit, rate, humanFunction, subtext, icon, loading, lastUpdate }) {
+function StatCard({ title, value, unit, rate, humanFunction, subtext, icon, lastUpdate }) {
 
   const [showRate, setShowRate] = useState(0);
   const [timer, setTimer] = useState(0);

@@ -20,9 +20,11 @@ export default function GlobeArea() {
     'purple'
   ]
 
+  const WRAPPER = document.querySelector('#globe');
+
   useEffect(() => {
     function resize() {
-      const WRAPPER = document.querySelector('#globe');
+
       setWidth(WRAPPER.clientWidth);
       setHeight(WRAPPER.clientHeight < 500 ? 500 : WRAPPER.clientHeight);
     }
@@ -72,10 +74,10 @@ export default function GlobeArea() {
 
   useEffect(() => {
     const globe = globeRef.current;
-    globe.controls().autoRotate = true;
+    globe.controls().autoRotate = false;
     globe.controls().autoRotateSpeed = 0.5;
     globe.controls().object.zoom = 1.0;
-    globe.pointOfView({ lat: 40, lng: -50, altitude: 2.5 });
+    globe.pointOfView({ lat: 40, lng: -97, altitude: 2.5 });
 
     // Check for mobile device, and turn off the globe controls
     let isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
@@ -111,7 +113,7 @@ export default function GlobeArea() {
         globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
         arcsData={arcsData}
         arcColor={'color'}
-        backgroundColor={'#111827'}
+        backgroundColor={'#FFFFFF'}
         arcDashLength={() => Math.random()}
         arcDashGap={() => Math.random()}
         arcDashAnimateTime={() => Math.random() * 4000 + 500}

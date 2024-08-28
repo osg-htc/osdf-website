@@ -12,10 +12,8 @@ export default function NavLink({ href, exact, children, ...props }) {
 
   return (
     <>
-      <Link href={href}>
-        <a {...props}>
+      <Link href={href} {...props}>
           {children}
-        </a>
       </Link>
       <style jsx>{`
         

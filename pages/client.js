@@ -12,9 +12,7 @@ export default function StashCP() {
     <>
       <Head>
         <title>OSDF Client</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
-      <NavBar />
       <div className='w-full flex bg-gray-900 p-6 flex-row items-center'>
         <div className='container mx-auto lg:grid lg:grid-cols-2 lg:gap-4'>
           <div className='py-12'>
@@ -71,10 +69,8 @@ export default function StashCP() {
             title='Portable'>
             <p>StashCP is statically compiled binary.  The same executable can run on multiple version of Linux.</p>
           </FeatureIcon>
-
         </div>
       </div>
-      <Footer />
     </>
   )
 }

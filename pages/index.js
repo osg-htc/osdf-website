@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import NavBar from '../components/navbar'
-import Footer from '../components/footer'
+import DefaultLayout, {Layout} from '../components/layout/default'
 import { ServerIcon, CodeIcon, GlobeIcon, CogIcon } from '@heroicons/react/outline'
 
 import dynamic from 'next/dynamic'
@@ -14,7 +13,6 @@ const GlobeArea = dynamic(() => import('../components/globe.js'), { ssr: false }
 
 export async function getStaticProps() {
   const data = await getData()
-  console.log("In static props:" + data);
   return {
     props: {
       usageData: data
@@ -23,15 +21,10 @@ export async function getStaticProps() {
 }
 
 export default function Home({ usageData }) {
-  console.log("In home:");
-  console.log(usageData);
   return (
     <>
-      <NavBar />
-
       <Head>
         <title>Open Science Data Federation</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <div className='w-full flex bg-gray-900 p-6'>
@@ -65,7 +58,7 @@ export default function Home({ usageData }) {
           </FeatureIcon>
           <FeatureIcon icon={<CogIcon className='h-7 w-7 text-lime-400 mr-1 my-1' />}
             title='Client Tools availble on the OSG'>
-            <p>Client tools such as <Link href="/stashcp"><a className='text-blue-300 hover:text-blue-500'>StashCP</a></Link> and CVMFS available for every operating system.</p>
+            <p>Client tools such as <Link href="/stashcp" className='text-blue-300 hover:text-blue-500'>StashCP</Link> and CVMFS available for every operating system.</p>
           </FeatureIcon>
 
           <FeatureIcon icon={<GlobeIcon className='h-7 w-7 text-lime-400 mr-1 my-1' />}
@@ -74,23 +67,8 @@ export default function Home({ usageData }) {
           </FeatureIcon>
 
         </div>
-
-
       </div>
-
-
-      <Footer />
-
     </>
   )
 }
 
-/*
-
-      <section className='bg-gray-900 p-8 text-white'>
-        <div className='container mx-auto'>
-          <h2 className='text-3xl font-extrabold mb-4 text-white'>Features</h2>
-          
-        </div>
-      </section>
-      */

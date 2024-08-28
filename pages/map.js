@@ -217,7 +217,6 @@ export default function OSDFMap() {
     <>
       <Head>
         <title>OSDF Maps</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <NavBar />
       <div className="grid grid-cols-3">
