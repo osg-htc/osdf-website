@@ -2,7 +2,7 @@
 process.env.NODE_ENV = 'production'
 process.chdir(__dirname)
 const NextServer = require('next/dist/server/next-server').default
-const https = require('https')
+const http = require('http')
 const path = require('path')
 const fs = require('fs')
 
@@ -12,11 +12,7 @@ process.on('SIGINT', () => process.exit(0))
 
 let handler
 
-const options = {
-  key: fs.readFileSync('/certs/tls.key'),
-  cert: fs.readFileSync('/certs/tls.crt'),
-};
-const server = https.createServer(options, async (req, res) => {
+const server = http.createServer({}, async (req, res) => {
   try {
     await handler(req, res)
   } catch (err) {
@@ -25,16 +21,20 @@ const server = https.createServer(options, async (req, res) => {
     res.end('internal server error')
   }
 })
-const currentPort = parseInt(process.env.PORT, 10) || 3000
+const currentPort = parseInt(process.env.PORT, 10) || 80
 
-server.listen(currentPort, (err) => {
+let listen_options = {
+  port: currentPort,
+  hostname: '0.0.0.0'
+}
+server.listen(listen_options, (err) => {
   if (err) {
     console.error("Failed to start server", err)
     process.exit(1)
   }
   const addr = server.address()
   const nextServer = new NextServer({
-    hostname: 'localhost',
+    hostname: '0.0.0.0',
     port: currentPort,
     dir: path.join(__dirname),
     dev: false,

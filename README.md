@@ -1,7 +1,7 @@
+OSDF Website
+============
 
-# OSDF Website
-
-# Running
+## Running
 
 ```shell
 docker build -t osdf-website --file dev.Dockerfile . 

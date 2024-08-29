@@ -37,7 +37,7 @@ export default function NavBar() {
                 </a>
               </li>
               <li>
-                <a href="https://portal.osg-htc.org/documentation/htc_workloads/managing_data/stashcache/" className="block mt-4 lg:inline-block lg:mt-0 text-white link-underline mr-4">
+                <a href="https://portal.osg-htc.org/documentation/htc_workloads/managing_data/osdf/" className="block mt-4 lg:inline-block lg:mt-0 text-white link-underline mr-4">
                   Examples
                 </a>
               </li>

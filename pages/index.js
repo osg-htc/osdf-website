@@ -58,14 +58,15 @@ export default function Home({ usageData }) {
           <FeatureIcon icon={<CodeIcon className='h-7 w-7 text-lime-400 mr-1 my-1' />}
             title='Built on Open Source'
           >
-            <p>Built projects such as <a href="https://xrootd.slac.stanford.edu/" className='text-blue-300 hover:text-blue-500'>XRootD</a>,
-              {' '}<a href="https://xrootd.slac.stanford.edu/" className='text-blue-300 hover:text-blue-500'>CVMFS</a>,
-              and <a href="https://xrootd.slac.stanford.edu/" className='text-blue-300 hover:text-blue-500'>Kubernetes</a></p>
+            <p>Built on projects such as <a href="https://pelicanplatform.org/" className='text-blue-300 hover:text-blue-500'>Pelican</a>,
+              {' '}<a href="https://xrootd.slac.stanford.edu/" className='text-blue-300 hover:text-blue-500'>XRootD</a>,
+              {' '}<a href="https://cernvm.cern.ch/fs/" className='text-blue-300 hover:text-blue-500'>CVMFS</a>,
+              and <a href="https://kubernetes.io/" className='text-blue-300 hover:text-blue-500'>Kubernetes</a></p>
 
           </FeatureIcon>
           <FeatureIcon icon={<CogIcon className='h-7 w-7 text-lime-400 mr-1 my-1' />}
             title='Client Tools availble on the OSG'>
-            <p>Client tools such as <Link href="/stashcp"><a className='text-blue-300 hover:text-blue-500'>StashCP</a></Link> and CVMFS available for every operating system.</p>
+            <p>Client tools such as <Link href="/client"><a className='text-blue-300 hover:text-blue-500'>StashCP</a></Link> and CVMFS available for every operating system.</p>
           </FeatureIcon>
 
           <FeatureIcon icon={<GlobeIcon className='h-7 w-7 text-lime-400 mr-1 my-1' />}
