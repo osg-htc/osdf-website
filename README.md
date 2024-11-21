@@ -7,3 +7,11 @@ OSDF Website
 docker build -t osdf-website --file dev.Dockerfile . 
 docker run -p 3000:3000 -t osdf-website
 ```
+
+## Deployment
+
+This website is deployed automatically. 
+
+https://osdf-website.osgdev.chtc.io/ is backed by the latest commit on the main branch
+
+https://osdf.osg-htc.org is backed by the highest semver tag. 
