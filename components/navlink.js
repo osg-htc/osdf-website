@@ -10,20 +10,16 @@ export default function NavLink({ href, exact, children, ...props }) {
     props.className += ' active';
   }
 
-  return (
-    <>
-      <Link href={href}>
-        <a {...props}>
-          {children}
-        </a>
-      </Link>
-      <style jsx>{`
-        
-        .active {
-          border-bottom: 2px solid #fff;
-          font-weight: bold;
-        }
-        `}</style>
-    </>
-  );
+  return (<>
+    <Link href={href} {...props}>
+      {children}
+    </Link>
+    <style jsx>{`
+      
+      .active {
+        border-bottom: 2px solid #fff;
+        font-weight: bold;
+      }
+      `}</style>
+  </>);
 }

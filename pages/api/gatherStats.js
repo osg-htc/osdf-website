@@ -94,9 +94,9 @@ async function getFilesRead(callback) {
 
 function getS3Config() {
   var s3 = new AWS.S3({
-    accessKeyId: process.env.NEXT_PUBLIC_S3ID,
-    secretAccessKey: process.env.NEXT_PUBLIC_S3ACESSSKEY,
-    endpoint: 'https://s3-west.nrp-nautilus.io',
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    endpoint: process.env.AWS_ENDPOINT,
     signatureVersion: 'v4',
     s3ForcePathStyle: true,
     httpOptions: {
@@ -108,18 +108,18 @@ function getS3Config() {
 
 function saveResult(result) {
   var s3 = getS3Config();
-  var params = { Bucket: 'dweitzel', Key: 'osdf-website/saved-state', Body: JSON.stringify(result) };
+  var params = { Bucket: process.env.AWS_BUCKET, Key: 'saved-state', Body: JSON.stringify(result) };
   s3.putObject(params, function (err, data) {
     if (err)
       console.log(err)
     else
-      console.log("Successfully uploaded data to dweitzel/osdf-website/saved-state");
+      console.log(`Successfully uploaded data to ${process.env.AWS_BUCKET}/saved-state`);
   });
 }
 
 function getSavedState() {
   var s3 = getS3Config();
-  var params = { Bucket: 'dweitzel', Key: 'osdf-website/saved-state' };
+  var params = { Bucket: process.env.AWS_BUCKET, Key: '/saved-state' };
   let returnedPromise = new Promise((resolve, reject) => {
     s3.getObject(params, function (err, data) {
       if (err) {
