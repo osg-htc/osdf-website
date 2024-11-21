@@ -3,6 +3,15 @@ OSDF Website
 
 ## Running
 
+### Fastest Iterator
+
+```shell
+npm install
+npm run dev
+```
+
+### Runs Everywhere
+
 ```shell
 docker build -t osdf-website --file dev.Dockerfile . 
 docker run -p 3000:3000 -t osdf-website
