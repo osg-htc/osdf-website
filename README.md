@@ -13,8 +13,8 @@ npm run dev
 ### Runs Everywhere
 
 ```shell
-docker build -t osdf-website --file dev.Dockerfile . 
-docker run -p 3000:3000 -t osdf-website
+docker build -t osdf-website --file Dockerfile . 
+docker run -p 3000:3000 --env-file .env -t osdf-website
 ```
 
 ## Deployment
