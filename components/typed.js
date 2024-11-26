@@ -11,7 +11,7 @@ export default function TypedArea() {
   useEffect(() => {
     const options = {
       strings: [
-        `<span class='text-green-600'>$</span> <span class='text-blue-600'>stashcp</span> /osgconnect/public/dweitzel/blast/queries/query1 ./<br/>
+        `<span class='text-green-600'>$</span> <span class='text-blue-600'>pelican object get</span> pelican://osg-htc.org/public/data ./<br/>
         query1 done!`,
       ],
       typeSpeed: 20,
