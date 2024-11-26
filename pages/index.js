@@ -62,7 +62,7 @@ export default function Home({ usageData }) {
         </FeatureIcon>
         <FeatureIcon icon={<CogIcon className='h-7 w-7 text-lime-400 mr-1 my-1' />}
           title='Client Tools availble on the OSG'>
-          <p>Client tools such as <Link href="/client" className='text-blue-300 hover:text-blue-500'>StashCP</Link> and CVMFS available for every operating system.</p>
+          <p>Client tools such as <Link href="https://docs.pelicanplatform.org/" className='text-blue-300 hover:text-blue-500'>Pelican</Link> and CVMFS available for every operating system.</p>
         </FeatureIcon>
 
         <FeatureIcon icon={<GlobeIcon className='h-7 w-7 text-lime-400 mr-1 my-1' />}

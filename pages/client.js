@@ -21,13 +21,13 @@ export default function StashCP() {
             <div>
               <h1 className='md:text-6xl text-2xl font-extrabold mb-4 text-white'>OSDF Client</h1>
               <p className='mt-5 sm:mt-10 lg:w-10/12 text-gray-400 font-normal text-lg sm:text-lg">'>
-                StashCP is the client tool to download or upload files on the Open Science Data Federation.
+                Pelican is the client tool to download or upload files on the Open Science Data Federation.
               </p>
               <div className=''>
-                <button onClick={() => window.location = "https://github.com/htcondor/osdf-client/releases"} className='button bg-green-600 hover:bg-green-700 text-white text-lg font-bold py-2 px-4 rounded-lg mt-5 shadow'>
+                <button onClick={() => window.location = "https://docs.pelicanplatform.org/install"} className='button bg-green-600 hover:bg-green-700 text-white text-lg font-bold py-2 px-4 rounded-lg mt-5 shadow'>
                   <div className='flex flex-row items-center'>
                     <div className='flex flex-col items-start'>
-                      <span>Download StashCP for your platform</span>
+                      <span>Download Pelican for your platform</span>
                       <span className='text-sm opacity-90 font-normal'>rpm, deb, exe, static binary</span>
                     </div>
                     <div>
@@ -36,7 +36,7 @@ export default function StashCP() {
                   </div>
                 </button>
                 <br />
-                <button onClick={() => window.location = "https://github.com/htcondor/osdf-client"} className='button bg-blue-600 hover:bg-blue-700 text-white text-lg font-bold py-2 px-4 rounded-lg mt-5 shadow'>
+                <button onClick={() => window.location = "https://github.com/PelicanPlatform/pelican"} className='button bg-blue-600 hover:bg-blue-700 text-white text-lg font-bold py-2 px-4 rounded-lg mt-5 shadow'>
                   <div className='flex flex-row items-center'>
                     <div className='flex flex-col items-start'>
                       <span>View the Source</span>
@@ -59,17 +59,17 @@ export default function StashCP() {
         <div className='container flex-none md:flex md:flex-row justify-center items-stretch mx-auto py-5'>
           <FeatureIcon icon={<ExclamationIcon className='h-7 w-7 text-lime-400 mr-1 my-1' />}
             title='Failure is expected!'>
-            <p>StashCP expects failure.  It retries connections, attempts to download from multiple caches, and downloads through different methods.</p>
+            <p>Pelican expects failure.  It retries connections, attempts to download from multiple caches, and downloads through different methods.</p>
 
           </FeatureIcon>
           <FeatureIcon icon={<DesktopComputerIcon className='h-7 w-7 text-lime-400 mr-1 my-1' />}
             title='Many supported platforms'>
-            <p>StashCP is compiled for many platforms and packaging managers.  It supports Linux, Mac, Windows OS.  It also has packages for Debian, RPMs, and Alpine.</p>
+            <p>Pelican is compiled for many platforms and packaging managers.  It supports Linux, Mac, Windows OS.  It also has packages for Debian, RPMs, and Alpine.</p>
           </FeatureIcon>
 
           <FeatureIcon icon={<BriefcaseIcon className='h-7 w-7 text-lime-400 mr-1 my-1' />}
             title='Portable'>
-            <p>StashCP is statically compiled binary.  The same executable can run on multiple version of Linux.</p>
+            <p>Pelican is a statically compiled binary.  The same executable can run on multiple version of Linux.</p>
           </FeatureIcon>
 
         </div>
