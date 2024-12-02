@@ -1,8 +1,6 @@
 OSDF Website
 ============
-
 ## Running
-
 ### Fastest Iterator
 
 ```shell
