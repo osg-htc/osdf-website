@@ -10,7 +10,7 @@ async function getDataRead(callback) {
   try {
     result = await client.transport.request({
       method: 'POST',
-      path: '/q/xrd-stash*/_search',
+      path: '/q/xrd-stash/_search',
       body: {
         "query": {
           "bool": {
@@ -58,7 +58,7 @@ async function getFilesRead(callback) {
   try {
     resultCount = await client.transport.request({
       method: 'POST',
-      path: '/q/xrd-stash*/_count',
+      path: '/q/xrd-stash/_count',
       body: {
         "query": {
           "bool": {
