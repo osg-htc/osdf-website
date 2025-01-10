@@ -12,7 +12,7 @@ export default async function handler(req, res) {
   try {
     result = await client.transport.request({
       method: 'POST',
-      path: '/q/xrd-stash*/_search',
+      path: '/q/xrd-stash/_search',
       body: {
         "query": {
           "bool": {
