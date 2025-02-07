@@ -146,7 +146,7 @@ export default function Reports() {
   
   const date = new Date(start * 1000);
   const month = date.toLocaleString('default', { month: 'long', timeZone: 'UTC' });
-  const year = date.getFullYear();
+  const year = date.getUTCFullYear();
 
   function pdfSave() {
     console.log("Save PDF");
