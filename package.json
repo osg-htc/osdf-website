@@ -17,7 +17,7 @@
     "aws-sdk": "^2.1693.0",
     "d3": "^7.9.0",
     "geoip-lite": "^1.4.10",
-    "html2pdf.js": "^0.10.3",
+    "html2pdf.js": "^0.14.0",
     "mapbox-gl": "^2.15.0",
     "next": "^15.5.11",
     "openid-client": "^5.7.1",
