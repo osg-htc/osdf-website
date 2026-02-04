@@ -1,6 +1,6 @@
 //const { Client } = require('@elastic/elasticsearch')
 const { Client } = require("@opensearch-project/opensearch");
-const client = new Client({ node: 'https://gracc.opensciencegrid.org' })
+const client = new Client({ node: 'https://gracc.opensciencegrid.org', requestTimeout: 300000 })
 const async = require('async');
 const AWS = require('aws-sdk');
 const https = require('https');
