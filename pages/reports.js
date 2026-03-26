@@ -205,10 +205,8 @@ export default function Reports() {
             <a onClick={pdfSave} target="_blank">Save Report as PDF</a>
           </button>
         </div>
-        <div className='grid grid-cols-3 mt-8 justify-center divide-x-2 lg:max-w-5xl mx-auto'>
+        <div className='grid grid-cols-2 mt-8 justify-center divide-x-2 lg:max-w-5xl mx-auto'>
           <StatsCard icon={<BriefcaseIcon className='h-7 w-7 text-lime-400 mr-1 my-1' />} title='Projects' value={totalProjects} />
-          <StatsCard icon={<BriefcaseIcon className='h-7 w-7 text-lime-400 mr-1 my-1' />} title='Caches' value={numCaches}>
-          </StatsCard>
           <StatsCard icon={<BriefcaseIcon className='h-7 w-7 text-lime-400 mr-1 my-1' />} title='Transferred' value={totalUsage} />
         </div>
         <div className='flex justify-items-center place-content-center mt-8'>
