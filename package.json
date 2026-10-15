@@ -6,6 +6,8 @@
     "start": "next start",
     "export": "next export",
     "prod": "node server.js",
+    "sample-doc": "node scripts/sampleDoc.js",
+    "cache-hit-miss": "node scripts/cacheHitMiss.js",
     "rm": "rm -rf .next && rm -rf node_modules"
   },
   "dependencies": {
