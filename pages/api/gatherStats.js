@@ -4,43 +4,15 @@ const client = new Client({ node: 'https://gracc.opensciencegrid.org', requestTi
 const async = require('async');
 const AWS = require('aws-sdk');
 const https = require('https');
+import { SUMMARY_SEARCH_PATH, LAST_YEAR, totalReadQuery, filesReadQuery } from '../../util/summaryQueries.mjs';
 
 async function getDataRead(callback) {
   var result = null;
   try {
     result = await client.transport.request({
       method: 'POST',
-      path: '/q/xrd-stash/_search',
-      body: {
-        "query": {
-          "bool": {
-            "must_not": [
-              {
-                "terms": {
-                  "logical_dirname.keyword": ["unknown directory", "missing directory"]
-                }
-              }
-            ],
-            "must": [
-              {
-                "range": {
-                  "@timestamp": {
-                    "gte": "now-1y",
-                    "lt": "now"
-                  }
-                }
-              }
-            ]
-          }
-        },
-        "aggs": {
-          "read": {
-            "sum": {
-              "field": "read"
-            }
-          }
-        }
-      }
+      path: SUMMARY_SEARCH_PATH,
+      body: totalReadQuery(LAST_YEAR.gte, LAST_YEAR.lt)
     });
   } catch (err) {
     console.log(err);
@@ -56,40 +28,20 @@ async function getDataRead(callback) {
 async function getFilesRead(callback) {
   var resultCount = null;
   try {
+    // Each summary row stands for many raw records, so add up its record counts rather than
+    // counting rows.
     resultCount = await client.transport.request({
       method: 'POST',
-      path: '/q/xrd-stash/_count',
-      body: {
-        "query": {
-          "bool": {
-            "must": [
-              {
-                "range": {
-                  "@timestamp": {
-                    "gte": "now-1y",
-                    "lt": "now"
-                  }
-                }
-              }
-            ],
-            "must_not": [
-              {
-                "terms": {
-                  "logical_dirname.keyword": ["unknown directory", "missing directory"]
-                }
-              }
-            ]
-          }
-        }
-      }
+      path: SUMMARY_SEARCH_PATH,
+      body: filesReadQuery(LAST_YEAR.gte, LAST_YEAR.lt)
     });
   } catch (err) {
     console.log(err);
     callback(err);
     return
   }
-  console.log(resultCount.body);
-  callback(null, resultCount.body.count);
+  console.log(resultCount.body.aggregations.files);
+  callback(null, resultCount.body.aggregations.files.value);
 }
 
 function getS3Config() {
