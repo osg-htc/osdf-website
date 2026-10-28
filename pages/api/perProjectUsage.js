@@ -1,6 +1,7 @@
 //const { Client } = require('@elastic/elasticsearch')
 const { Client } = require("@opensearch-project/opensearch");
 const client = new Client({ node: 'https://gracc.opensciencegrid.org', requestTimeout: 300000 })
+import { SUMMARY_SEARCH_PATH, readByDirectoryQuery } from '../../util/summaryQueries.mjs';
 
 export default async function handler(req, res) {
   console.log("Starting request to gracc.opensciencegrid.org");
@@ -26,45 +27,8 @@ export default async function handler(req, res) {
   try {
     result = await client.transport.request({
       method: 'POST',
-      path: '/q/xrd-stash/_search',
-      body: {
-        "query": {
-          "bool": {
-            "must_not": [
-              {
-                "terms": {
-                  "logical_dirname.keyword": ["unknown directory", "missing directory"]
-                }
-              }
-            ],
-            "must": [
-              {
-                "range": {
-                  "@timestamp": {
-                    "gte": req.query.start * 1000,
-                    "lt": req.query.end * 1000
-                  }
-                }
-              }
-            ]
-          }
-        },
-        "aggs": {
-          "bydirectory": {
-            "terms": {
-              "field": "logical_dirname.keyword",
-              "size": 10000
-            },
-            "aggs": {
-              "read": {
-                "sum": {
-                  "field": "read"
-                }
-              }
-            }
-          }
-        }
-      }
+      path: SUMMARY_SEARCH_PATH,
+      body: readByDirectoryQuery(req.query.start * 1000, req.query.end * 1000)
     });
   } catch (err) {
     console.log(err);
